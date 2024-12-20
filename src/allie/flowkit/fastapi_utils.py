@@ -45,6 +45,10 @@ def extract_field_type(field_info: dict):
 
     """
     field_type = field_info.get("type", "Unknown")
+    if field_type == "object":
+        dict_field = field_info.get("additionalProperties", {})
+        dict_type = dict_field.get("type", "Unknown")
+        return f"dict[string][{dict_type}]"
     if field_type == "array":
         items = field_info.get("items", {})
         item_type = extract_field_type(items)
