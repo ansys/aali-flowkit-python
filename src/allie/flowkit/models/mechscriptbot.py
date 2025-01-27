@@ -36,6 +36,7 @@ class MechScriptBotRequest(BaseModel):
     """
 
     question: str
+    mech_script_bot_url: str
     full_human_memory: list[str]
     full_ai_memory: list[str]
     full_variables: list[str]

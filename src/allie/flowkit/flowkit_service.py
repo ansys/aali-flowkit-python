@@ -39,7 +39,7 @@ function_map = {
     "split_ppt": splitter.split_ppt,
     "split_pdf": splitter.split_pdf,
     "split_py": splitter.split_py,
-    "triggerMechanicalScriptingBot": mechscriptbot.triggerMechanicalScriptingBot,
+    "triggerMechanicalScriptingBot": mechscriptbot.triggerMechScriptBot,
 }
 
 

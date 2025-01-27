@@ -11,7 +11,7 @@ router = APIRouter()
 @router.post("/trigger", response_model=MechScriptBotResponse)
 @category(FunctionCategory.GENERIC)
 @display_name("MechanicalScriptingBot")
-async def triggerMechanicalScriptingBot(request: MechScriptBotRequest, api_key: str = Header(...)) -> MechScriptBotResponse:
+async def triggerMechScriptBot(request: MechScriptBotRequest, api_key: str = Header(...)) -> MechScriptBotResponse:
     """Endpoint for triggering the MechanicalScriptingBot application.
 
     Parameters
@@ -26,7 +26,7 @@ async def triggerMechanicalScriptingBot(request: MechScriptBotRequest, api_key: 
     if api_key != CONFIG.flowkit_python_api_key:
         raise HTTPException(status_code=401, detail="Invalid API key")
     
-    url = str(CONFIG._yaml.get("MECH_SCRIPT_BOT_URL", ""))
+    url = request.mech_script_bot_url
 
     request_dict = request.model_dump()
     request_dict_copy = {key:val for key, val in request_dict.items()}
@@ -39,7 +39,7 @@ async def triggerMechanicalScriptingBot(request: MechScriptBotRequest, api_key: 
 
     response_dict = requests.get(url=url, json=request_dict_copy).json()
 
-    output = f"```{response_dict["output"]}"
+    output = f"```{response_dict['output']}"
 
     human_new_mem, ai_new_mem = tuple(response_dict["new_memory"])
     updated_human_memory = request.full_human_memory + [human_new_mem]
