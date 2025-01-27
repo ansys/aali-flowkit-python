@@ -11,7 +11,7 @@ router = APIRouter()
 @router.post("/trigger", response_model=MechScriptBotResponse)
 @category(FunctionCategory.GENERIC)
 @display_name("MechanicalScriptingBot")
-async def triggerMechScriptBot(request: MechScriptBotRequest, api_key: str = Header(...)) -> MechScriptBotResponse:
+async def triggermechscriptbot(request: MechScriptBotRequest, api_key: str = Header(...)) -> MechScriptBotResponse:
     """Endpoint for triggering the MechanicalScriptingBot application.
 
     Parameters
