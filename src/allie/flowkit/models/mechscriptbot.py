@@ -20,13 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Model for the MechanicalACTBot endpoint."""
+"""Model for the MechanicalScriptingBot endpoint."""
 
 from pydantic import BaseModel
 
 
 class MechScriptBotRequest(BaseModel):
-    """Request model for the MechanicalACTBot endpoint.
+    """Request model for the MechanicalScriptingBot endpoint.
 
     Parameters
     ----------
@@ -44,7 +44,7 @@ class MechScriptBotRequest(BaseModel):
 
 
 class MechScriptBotResponse(BaseModel):
-    """Response model for the MechanicalACTBot endpoint.
+    """Response model for the MechanicalScriptingBot endpoint.
 
     Parameters
     ----------
