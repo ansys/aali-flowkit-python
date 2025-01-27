@@ -21,6 +21,11 @@ async def triggermechscriptbot(request: MechScriptBotRequest, api_key: str = Hea
     api_key : str
         The API key for authentication.
 
+    Returns
+    -------
+    MechScriptBotResponse
+        An object containing the output and other relevant metadata for the MechanicalScriptingBot application.
+
     """
 
     if api_key != CONFIG.flowkit_python_api_key:
