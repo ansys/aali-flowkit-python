@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -51,17 +51,16 @@ async def triggermechscriptbot(request: MechScriptBotRequest, api_key: str = Hea
         An object containing the output and other relevant metadata for the MechanicalScriptingBot application.
 
     """
-
     if api_key != CONFIG.flowkit_python_api_key:
         raise HTTPException(status_code=401, detail="Invalid API key")
-    
+
     url = request.mech_script_bot_url
 
     request_dict = request.model_dump()
-    request_dict_copy = {key:val for key, val in request_dict.items()}
+    request_dict_copy = {key: val for key, val in request_dict.items()}
 
     full_variables_list = request.full_variables
-    full_variables_dict = {variable.split(':')[0] : variable.split(':')[1] for variable in full_variables_list}
+    full_variables_dict = {variable.split(":")[0]: variable.split(":")[1] for variable in full_variables_list}
     request_dict_copy["full_variables"] = full_variables_dict
 
     request_dict_copy["full_memory"] = [request.full_human_memory, request.full_ai_memory]
@@ -84,6 +83,5 @@ async def triggermechscriptbot(request: MechScriptBotRequest, api_key: str = Hea
         updated_human_memory=updated_human_memory,
         updated_ai_memory=updated_ai_memory,
         updated_variables=updated_variables,
-        updated_mechanical_objects=updated_mechanical_objects
+        updated_mechanical_objects=updated_mechanical_objects,
     )
-

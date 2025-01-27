@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -23,7 +23,7 @@
 """Module for the Allie Flowkit service."""
 
 from allie.flowkit.config._config import CONFIG
-from allie.flowkit.endpoints import splitter, mechscriptbot
+from allie.flowkit.endpoints import mechscriptbot, splitter
 from allie.flowkit.fastapi_utils import extract_endpoint_info
 from allie.flowkit.models.functions import EndpointInfo
 from fastapi import FastAPI, Header, HTTPException
