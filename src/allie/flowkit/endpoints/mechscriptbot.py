@@ -74,8 +74,7 @@ async def triggermechscriptbot(request: MechScriptBotRequest, api_key: str = Hea
     updated_ai_memory = request.full_ai_memory + [ai_new_mem]
 
     new_variables_list = [
-        f"{var_name}:{var_type}" 
-        for var_name, var_type in (response_dict.get("new_variables", {})).items()
+        f"{var_name}:{var_type}" for var_name, var_type in (response_dict.get("new_variables", {})).items()
     ]
     updated_variables = request.full_variables + new_variables_list
 
