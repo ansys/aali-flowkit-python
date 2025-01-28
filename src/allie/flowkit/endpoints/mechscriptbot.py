@@ -67,16 +67,18 @@ async def triggermechscriptbot(request: MechScriptBotRequest, api_key: str = Hea
 
     response_dict = requests.get(url=url, json=request_dict_copy).json()
 
-    output = f"```{response_dict['output']}"
+    output = f"```{response_dict.get('output', '')}"
 
-    human_new_mem, ai_new_mem = tuple(response_dict["new_memory"])
+    human_new_mem, ai_new_mem = tuple(response_dict.get("new_memory", []))
     updated_human_memory = request.full_human_memory + [human_new_mem]
     updated_ai_memory = request.full_ai_memory + [ai_new_mem]
 
-    new_variables_list = [f"{var_name}:{var_type}" for var_name, var_type in (response_dict["new_variables"]).items()]
+    new_variables_list = [
+        f"{var_name}:{var_type}" for var_name, var_type in (response_dict.get("new_variables", {})).items()
+    ]
     updated_variables = request.full_variables + new_variables_list
 
-    updated_mechanical_objects = request.full_mechanical_objects + response_dict["new_mechanical_objects"]
+    updated_mechanical_objects = request.full_mechanical_objects + response_dict.get("new_mechanical_objects", [])
 
     return MechScriptBotResponse(
         output=output,
