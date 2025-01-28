@@ -20,53 +20,41 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for defining the models used in the endpoints."""
-
-from enum import Enum
-from typing import Any
+"""Model for the MechanicalScriptingBot endpoint."""
 
 from pydantic import BaseModel
 
 
-class ParameterInfo(BaseModel):
-    """Parameter information model.
+class MechScriptBotRequest(BaseModel):
+    """Request model for the MechanicalScriptingBot endpoint.
 
     Parameters
     ----------
     BaseModel : pydantic.BaseModel
-        The base model for the parameter information
+        The base model for the request.
 
     """
 
-    name: str
-    type: str
+    question: str
+    mech_script_bot_url: str
+    full_human_memory: list[str]
+    full_ai_memory: list[str]
+    full_variables: list[str]
+    full_mechanical_objects: list[str]
 
 
-class EndpointInfo(BaseModel):
-    """Endpoint information model.
+class MechScriptBotResponse(BaseModel):
+    """Response model for the MechanicalScriptingBot endpoint.
 
     Parameters
     ----------
     BaseModel : pydantic.BaseModel
-        The base model for the endpoint information
+        The base model for the response.
 
     """
 
-    name: str
-    path: str
-    category: str
-    display_name: str
-    description: str
-    inputs: list[ParameterInfo]
-    outputs: list[ParameterInfo]
-    definitions: dict[str, Any]
-
-
-class FunctionCategory(Enum):
-    """Enum for function categories."""
-
-    DATA_EXTRACTION = "data_extraction"
-    GENERIC = "generic"
-    KNOWLEDGE_DB = "knowledge_db"
-    LLM_HANDLER = "llm_handler"
-    ANSYS_GPT = "ansys_gpt"
+    output: str
+    updated_human_memory: list[str]
+    updated_ai_memory: list[str]
+    updated_variables: list[str]
+    updated_mechanical_objects: list[str]

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -23,7 +23,7 @@
 """Module for the Allie Flowkit service."""
 
 from allie.flowkit.config._config import CONFIG
-from allie.flowkit.endpoints import splitter
+from allie.flowkit.endpoints import mechscriptbot, splitter
 from allie.flowkit.fastapi_utils import extract_endpoint_info
 from allie.flowkit.models.functions import EndpointInfo
 from fastapi import FastAPI, Header, HTTPException
@@ -32,12 +32,14 @@ flowkit_service = FastAPI()
 
 # Include routers from all endpoints
 flowkit_service.include_router(splitter.router, prefix="/splitter", tags=["splitter"])
+flowkit_service.include_router(mechscriptbot.router, prefix="/mechanicalscriptingbot", tags=["mechscriptbot"])
 
 # Map of function names to function objects
 function_map = {
     "split_ppt": splitter.split_ppt,
     "split_pdf": splitter.split_pdf,
     "split_py": splitter.split_py,
+    "triggermechscriptbot": mechscriptbot.triggermechscriptbot,
 }
 
 
