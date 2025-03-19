@@ -18,6 +18,7 @@ COPY --chown=appuser:appgroup src /app
 COPY --chown=appuser:appgroup README.md /app
 COPY --chown=appuser:appgroup pyproject.toml /app
 COPY --chown=appuser:appgroup configs/config.yaml /app
+COPY --chown=appuser:appgroup LICENSE /app
 
 # Switch to the non-root user
 USER appuser
