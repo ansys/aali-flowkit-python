@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   binaries:
-    name : Create binaries for Windows, Linux and MacOS
+    name : Create binaries
     # needs: [release]
     runs-on: ${{ matrix.os }}
     strategy:
@@ -30,7 +30,7 @@ jobs:
         python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
     - name: Install dependencies
-      run: pip install .
+      run: pip install .[all]
 
     - name: Install PyInstaller
       run: pip install pyinstaller
