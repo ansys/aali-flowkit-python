@@ -37,13 +37,12 @@ jobs:
 
     - name: Attempt to build executable
       id: first-attempt
-      run: |
-        pyinstaller src/allie/flowkit/__main__.py \
-        --onefile \
-        --name allie-flowkit-python-test \
-        --collect-metadata allie-flowkit-python \
-        --hidden-import uvicorn \
-        --collect-all uvicorn
+      run: >
+        pyinstaller src/allie/flowkit/__main__.py --onefile
+        --name ${{ github.event.repository.name }}-test
+        --collect-metadata allie-flowkit-python      # keep importlib.metadata working
+        --hidden-import uvicorn --collect-all uvicorn  # bring in the runtime server
+        --distpath build/dist --workpath build/build --specpath build
       continue-on-error: true
 
     - name: Modify spec file and retry build
