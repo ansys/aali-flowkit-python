@@ -40,7 +40,7 @@ jobs:
       run: >
         pyinstaller src/allie/flowkit/__main__.py --onefile
         --name ${{ github.event.repository.name }}-test
-        --collect-metadata allie-flowkit-python      # keep importlib.metadata working
+        --copy-metadata ${{ github.event.repository.name }}      # keep importlib.metadata working
         --hidden-import uvicorn --collect-all uvicorn  # bring in the runtime server
         --distpath build/dist --workpath build/build --specpath build
       continue-on-error: true
