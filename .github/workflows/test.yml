@@ -23,12 +23,18 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
     - name: Install dependencies
       run: pip install .
+
+    - name: Install PyInstaller
+      run: pip install pyinstaller
+
     - name: Attempt to build executable
       id: first-attempt
       run: |
