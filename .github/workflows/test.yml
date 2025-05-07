@@ -46,7 +46,7 @@ jobs:
         --copy-metadata ${{ github.event.repository.name }}
         --hidden-import uvicorn --collect-all uvicorn
         --distpath build/dist --workpath build/build --specpath build
-        continue-on-error: true
+      continue-on-error: true
     
     - name: Modify spec file and retry build
       if: steps.first-attempt.outcome == 'failure'
