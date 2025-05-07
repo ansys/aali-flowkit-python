@@ -41,7 +41,7 @@ jobs:
         id: first-attempt
         run: >
           pyinstaller src/allie/flowkit/__main__.py --onefile
-          --name ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ steps.os_name.outputs.os_short }}
+          --name ${{ github.event.repository.name }}-test-${{ steps.os_name.outputs.os_short }}
           --copy-metadata ${{ github.event.repository.name }}
           --hidden-import uvicorn --collect-all uvicorn
           --distpath build/dist --workpath build/build --specpath build
@@ -50,8 +50,8 @@ jobs:
       - name: Modify spec file and retry build
         if: steps.first-attempt.outcome == 'failure'
         run: |
-          echo "import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)" >> ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ steps.os_name.outputs.os_short }}.spec
-          pyinstaller ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ steps.os_name.outputs.os_short }}.spec
+          echo "import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)" >> ${{ github.event.repository.name }}-test-${{ steps.os_name.outputs.os_short }}.spec
+          pyinstaller ${{ github.event.repository.name }}-test-${{ steps.os_name.outputs.os_short }}.spec
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
