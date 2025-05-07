@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Run PyAnsys code style checks"
-        uses: ansys/actions/code-style@v8
+        uses: ansys/actions/code-style@v9
 
   smoke-tests:
     name: Build and Smoke tests
@@ -44,7 +44,7 @@ jobs:
             os: macos-latest
     steps:
       - name: Build wheelhouse and perform smoke test
-        uses: ansys/actions/build-wheelhouse@v8
+        uses: ansys/actions/build-wheelhouse@v9
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@v8
+        uses: ansys/actions/doc-style@v9
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -103,7 +103,7 @@ jobs:
     steps:
 
     - name: "Run Ansys documentation building action"
-      uses: ansys/actions/doc-build@v8
+      uses: ansys/actions/doc-build@v9
       with:
         add-pdf-html-docs-as-assets: true
 
@@ -114,7 +114,7 @@ jobs:
     needs: [docs-build]
     steps:
       - name: Deploy the latest documentation
-        uses: ansys/actions/doc-deploy-dev@v8
+        uses: ansys/actions/doc-deploy-dev@v9
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -131,7 +131,7 @@ jobs:
     steps:
 
       - name: Testing
-        uses: ansys/actions/tests-pytest@v8
+        uses: ansys/actions/tests-pytest@v9
         timeout-minutes: 12
 
       - name: Upload coverage results (HTML)
@@ -163,7 +163,7 @@ jobs:
     needs: [release]
     steps:
       - name: Deploy the stable documentation
-        uses: ansys/actions/doc-deploy-stable@v8
+        uses: ansys/actions/doc-deploy-stable@v9
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -229,3 +229,88 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+
+  binaries:
+    name : Create binaries
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    needs: [release]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+          os: [windows-latest, ubuntu-latest, macos-latest]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+    - name: Install dependencies
+      run: pip install .[all]
+
+    - name: Install PyInstaller
+      run: pip install pyinstaller
+
+    - name: Attempt to build executable
+      id: first-attempt
+      run: >
+        pyinstaller src/allie/flowkit/__main__.py --onefile
+        --name ${{ github.event.repository.name }}-${{ github.ref_name }}
+        --copy-metadata ${{ github.event.repository.name }}      # keep importlib.metadata working
+        --hidden-import uvicorn --collect-all uvicorn  # bring in the runtime server
+        --distpath build/dist --workpath build/build --specpath build
+      continue-on-error: true
+
+    - name: Modify spec file and retry build
+      if: steps.first-attempt.outcome == 'failure'
+      run: |
+        echo "import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)" >> ${{ github.event.repository.name }}-${{ github.ref_name }}.spec
+        pyinstaller ${{ github.event.repository.name }}-${{ github.ref_name }}.spec
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.os }}-binaries
+        path: dist/${{ github.event.repository.name }}-*
+
+  sign-windows-binary:
+    name: Sign Windows binary
+    needs: [binaries]
+    runs-on:
+        group: ansys-network
+        labels: [self-hosted, Windows, signtool]
+    steps:
+      - name: Checkout the SignTool
+        uses: actions/checkout@v4
+        with:
+            repository: ansys-internal/signtool-ansys-apps
+            token: ${{ secrets.SIGNTOOL_ACCESS_TOKEN }}
+
+      - uses: actions/download-artifact@v4
+        with:
+            name: windows-latest-binaries
+            path: signtool/installer
+
+      - name: List current structure
+        run: ls -R
+
+      - name: Sign application
+        working-directory: signtool
+        run: |
+            $filename = (get-ChildItem installer -recurse | where {$_.name -like "allie-flowkit-python*"}).Name
+            $jobname = $filename -replace ".{4}$"
+            .\Ansys.SignClient.exe sign `
+            --signUrl https://csign.ansys.com `
+            -r gh_signtool_account `
+            -s '${{ secrets.SIGNTOOL_PWD }}' `
+            -n $jobname `
+            -i installer/$filename `
+            -o installer/$filename
+
+      - uses: actions/upload-artifact@v4
+        with:
+            name: windows-latest-binaries-signed
+            path: signtool/installer/*.exe
