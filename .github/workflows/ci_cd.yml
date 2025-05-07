@@ -226,41 +226,45 @@ jobs:
       matrix:
           os: [windows-latest, ubuntu-latest, macos-latest]
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ env.MAIN_PYTHON_VERSION }}
-
-    - name: Install dependencies
-      run: pip install .[all]
-
-    - name: Install PyInstaller
-      run: pip install pyinstaller
-
-    - name: Attempt to build executable
-      id: first-attempt
-      run: >
-        pyinstaller src/allie/flowkit/__main__.py --onefile
-        --name ${{ github.event.repository.name }}-${{ github.ref_name }}
-        --copy-metadata ${{ github.event.repository.name }}      # keep importlib.metadata working
-        --hidden-import uvicorn --collect-all uvicorn  # bring in the runtime server
-        --distpath build/dist --workpath build/build --specpath build
-      continue-on-error: true
-
-    - name: Modify spec file and retry build
-      if: steps.first-attempt.outcome == 'failure'
-      run: |
-        echo "import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)" >> ${{ github.event.repository.name }}-${{ github.ref_name }}.spec
-        pyinstaller ${{ github.event.repository.name }}-${{ github.ref_name }}.spec
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ matrix.os }}-binaries
-        path: dist/${{ github.event.repository.name }}-*
+      - name: Checkout code
+        uses: actions/checkout@v4
+  
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+  
+      - name: Install dependencies
+        run: pip install .[all]
+  
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+  
+      - name: Set OS name
+        id: os_name
+        run: echo "os_short=$(echo '${{ matrix.os }}' | sed 's/-latest//')" >> $GITHUB_OUTPUT
+  
+      - name: Attempt to build executable
+        id: first-attempt
+        run: >
+          pyinstaller src/allie/flowkit/__main__.py --onefile
+          --name ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ steps.os_name.outputs.os_short }}
+          --copy-metadata ${{ github.event.repository.name }}
+          --hidden-import uvicorn --collect-all uvicorn
+          --distpath build/dist --workpath build/build --specpath build
+        continue-on-error: true
+      
+      - name: Modify spec file and retry build
+        if: steps.first-attempt.outcome == 'failure'
+        run: |
+          echo "import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)" >> ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ steps.os_name.outputs.os_short }}.spec
+          pyinstaller ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ steps.os_name.outputs.os_short }}.spec
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-binaries
+          path: build/dist/${{ github.event.repository.name }}-*
 
   sign-windows-binary:
     name: Sign Windows binary
