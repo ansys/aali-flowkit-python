@@ -52,7 +52,7 @@ jobs:
       if: steps.first-attempt.outcome == 'failure'
       run: |
         echo "import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)" >> ${{ github.event.repository.name }}-test-${{ steps.os_name.outputs.os_short }}-${{ runner.arch }}.spec
-        pyinstaller ${{ github.event.repository.name }}-$test-${{ steps.os_name.outputs.os_short }}-${{ runner.arch }}.spec
+        pyinstaller ${{ github.event.repository.name }}-test-${{ steps.os_name.outputs.os_short }}-${{ runner.arch }}.spec
     
     - name: Upload artifact
       uses: actions/upload-artifact@v4
