@@ -34,7 +34,7 @@ jobs:
     - name: Install PyInstaller
       run: pip install pyinstaller
 
-    - name: Set OS short name
+    - name: Set OS name
       id: os_name
       run: echo "os_short=$(echo '${{ matrix.os }}' | sed 's/-latest//')" >> $GITHUB_OUTPUT
 
@@ -47,11 +47,6 @@ jobs:
         --hidden-import uvicorn --collect-all uvicorn
         --distpath build/dist --workpath build/build --specpath build
       continue-on-error: true
-    
-    - name: Echo dist path
-      run: |
-        echo "dist path: $(ls -d build/dist/*)"
-        echo "spec path: $(ls -d dist)"
     
     - name: Modify spec file and retry build
       if: steps.first-attempt.outcome == 'failure'
