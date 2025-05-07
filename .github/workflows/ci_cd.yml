@@ -142,20 +142,6 @@ jobs:
           path: .cov/html
           retention-days: 7
 
-  release:
-    name: "Release project"
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-    needs: [docs-build, tests]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Release to GitHub
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-
   upload_docs_release:
     name: Upload release documentation
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
@@ -233,7 +219,7 @@ jobs:
   binaries:
     name : Create binaries
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-    needs: [release]
+    needs: [docs-build, tests]
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -314,3 +300,36 @@ jobs:
         with:
             name: windows-latest-binaries-signed
             path: signtool/installer/*.exe
+  release:
+    name: Create release
+    needs: [sign-windows-binary, binaries]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Windows binaries
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-latest-binaries-signed
+          path: dist
+
+      - name: Download Linux binaries
+        uses: actions/download-artifact@v4
+        with:
+          name: ubuntu-latest-binaries
+          path: dist
+
+      - name: Download MacOS binaries
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-latest-binaries
+          path: dist
+
+      - name: Release to GitHub
+        uses: softprops/action-gh-release@v2
+        with:
+          fail_on_unmatched_files: true
+          generate_release_notes: true
+          files: |
+            dist/${{ github.event.repository.name }}-**
