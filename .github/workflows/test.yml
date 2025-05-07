@@ -57,8 +57,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.os }}-${{ runner.arch }}-binaries
-        path: dist/${{ github.event.repository.name }}-test-${{ steps.os_name.outputs.os_short }}-${{ runner.arch }}*
+        name: ${{ matrix.os }}-binaries
+        path: dist/${{ github.event.repository.name }}-*
 
   sign-windows-binary:
     name: Sign Windows binary
