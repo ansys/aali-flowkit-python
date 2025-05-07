@@ -242,7 +242,10 @@ jobs:
 
       - name: Set OS name
         id: os_name
-        run: echo "os_short=$(echo '${{ matrix.os }}' | sed 's/-latest//')" >> $GITHUB_OUTPUT
+        shell: bash
+        run: |
+          os_short=$(echo "${{ matrix.os }}" | sed 's/-latest//')
+          echo "os_short=$os_short" >> $GITHUB_OUTPUT
 
       - name: Attempt to build executable
         id: first-attempt
