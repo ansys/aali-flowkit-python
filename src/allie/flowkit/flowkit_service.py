@@ -20,12 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for the Aali Flowkit service."""
+"""Module for the Allie Flowkit service."""
 
-from aali.flowkit.config._config import CONFIG
-from aali.flowkit.endpoints import mechscriptbot, splitter
-from aali.flowkit.fastapi_utils import extract_endpoint_info
-from aali.flowkit.models.functions import EndpointInfo
+from allie.flowkit.config._config import CONFIG
+from allie.flowkit.endpoints import mechscriptbot, splitter
+from allie.flowkit.fastapi_utils import extract_endpoint_info
+from allie.flowkit.models.functions import EndpointInfo
 from fastapi import FastAPI, Header, HTTPException
 
 flowkit_service = FastAPI()

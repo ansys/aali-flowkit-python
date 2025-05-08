@@ -33,4 +33,4 @@ RUN python -m venv /app/venv \
 EXPOSE 50052
 
 # Activate the virtual environment and run the service
-CMD ["/bin/sh", "-c", ". /app/venv/bin/activate && aali-flowkit-python"]
+CMD ["/bin/sh", "-c", ". /app/venv/bin/activate && allie-flowkit-python"]

@@ -22,10 +22,10 @@
 
 """Module for triggering the MechanicalScriptingBot application."""
 
-from aali.flowkit.config._config import CONFIG
-from aali.flowkit.models.functions import FunctionCategory
-from aali.flowkit.models.mechscriptbot import MechScriptBotRequest, MechScriptBotResponse
-from aali.flowkit.utils.decorators import category, display_name
+from allie.flowkit.config._config import CONFIG
+from allie.flowkit.models.functions import FunctionCategory
+from allie.flowkit.models.mechscriptbot import MechScriptBotRequest, MechScriptBotResponse
+from allie.flowkit.utils.decorators import category, display_name
 from fastapi import APIRouter, Header, HTTPException
 import requests
 
