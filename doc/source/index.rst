@@ -1,9 +1,9 @@
-Allie Flowkit Python documentation |version|
+Aali Flowkit Python documentation |version|
 =============================================
 
-The Allie Flowkit Python is a Python service that exposes features from Allie Flowkit to Python users. This documentation provides information on how to install and use the Allie Flowkit Python.
+The Aali Flowkit Python is a Python service that exposes features from Aali Flowkit to Python users. This documentation provides information on how to install and use the Aali Flowkit Python.
 
-The Allie Flowkit Python offers these main features:
+The Aali Flowkit Python offers these main features:
 
 
 
@@ -15,7 +15,7 @@ The Allie Flowkit Python offers these main features:
         :link: getting_started/index
         :link-type: doc
 
-        Learn how to install the Allie Flowkit Python in user mode and quickly
+        Learn how to install the Aali Flowkit Python in user mode and quickly
         begin using it.
 
     .. grid-item-card:: User guide :material-regular:`menu_book`
@@ -23,7 +23,7 @@ The Allie Flowkit Python offers these main features:
         :link: user_guide/index
         :link-type: doc
 
-        Understand key concepts for implementing the Allie Flowkit Python in
+        Understand key concepts for implementing the Aali Flowkit Python in
         your workflow.
 
     .. jinja:: main_toctree
@@ -31,11 +31,11 @@ The Allie Flowkit Python offers these main features:
         {% if build_api %}
         .. grid-item-card:: API reference :material-regular:`bookmark`
             :padding: 2 2 2 2
-            :link: api/src/allie/flowkit/index
+            :link: api/src/aali/flowkit/index
             :link-type: doc
 
             Understand how to use Python to interact programmatically with
-            the Allie Flowkit Python.
+            the Aali Flowkit Python.
         {% endif %}
 
         {% if build_examples %}
@@ -44,7 +44,7 @@ The Allie Flowkit Python offers these main features:
             :link: examples/index
             :link-type: doc
 
-            Explore examples that show how to use the Allie Flowkit Python to
+            Explore examples that show how to use the Aali Flowkit Python to
             perform many different types of operations.
         {% endif %}
 
@@ -53,7 +53,7 @@ The Allie Flowkit Python offers these main features:
             :link: contributing
             :link-type: doc
 
-            Learn how to contribute to the Allie Flowkit Python codebase or documentation.
+            Learn how to contribute to the Aali Flowkit Python codebase or documentation.
 
 
 .. jinja:: main_toctree

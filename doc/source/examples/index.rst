@@ -3,5 +3,5 @@
 Examples
 ========
 
-This section show how to use the Allie Flowkit Python to perform many different
+This section show how to use the Aali Flowkit Python to perform many different
 types of operations.

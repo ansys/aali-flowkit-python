@@ -24,9 +24,9 @@
 import base64
 from pathlib import Path
 
-from allie.flowkit import flowkit_service
-from allie.flowkit.endpoints.splitter import validate_request
-from allie.flowkit.models.splitter import SplitterRequest
+from aali.flowkit import flowkit_service
+from aali.flowkit.endpoints.splitter import validate_request
+from aali.flowkit.models.splitter import SplitterRequest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 import pytest
