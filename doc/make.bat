@@ -49,7 +49,7 @@ goto end
 cd "%BUILDDIR%\latex"
 for %%f in (*.tex) do (
 pdflatex "%%f" --interaction=nonstopmode)
-if NOT EXIST aali-flowkit-python.pdf (
+if NOT EXIST allie-flowkit-python.pdf (
 	Echo "no pdf generated!"
 	exit /b 1)
 Echo "pdf generated!"

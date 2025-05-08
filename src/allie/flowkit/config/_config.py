@@ -37,7 +37,7 @@ class Config:
     Attributes
     ----------
     flowkit_python_api_key : str
-        The API key for accessing the Aali Flowkit Python service.
+        The API key for accessing the Allie Flowkit Python service.
 
     Methods
     -------
@@ -60,7 +60,7 @@ class Config:
             configuration file.
 
         """
-        config_path = os.getenv("AALI_CONFIG_PATH", "config.yaml")
+        config_path = os.getenv("ALLIE_CONFIG_PATH", "config.yaml")
         self._yaml = self._load_config(config_path)
 
         # Define the configuration variables to be parsed from the YAML file
