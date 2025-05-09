@@ -279,7 +279,7 @@ jobs:
       - name: Checkout the SignTool
         uses: actions/checkout@v4
         with:
-            repository: ansys-internal/signtool-ansys-apps
+            repository: ansys/signtool-ansys-apps
             token: ${{ secrets.SIGNTOOL_ACCESS_TOKEN }}
 
       - uses: actions/download-artifact@v4
