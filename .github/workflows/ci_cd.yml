@@ -340,3 +340,35 @@ jobs:
           generate_release_notes: true
           files: |
             dist/${{ github.event.repository.name }}-**
+
+  main_release:
+    name: Update main aali repo and create release
+    needs: [ release, docker ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout aali repository
+        run: |
+          git clone --branch main https://${{ secrets.AALI_RELEASE_TOKEN }}@github.com/ansys/aali.git
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'aali/scripts/releasehelper/go.mod'
+
+      - name: Run tag script
+        run: |
+          cd aali/scripts/releasehelper
+          go run main.go "tag" ${{ github.ref_name }} ${{ secrets.AALI_RELEASE_TOKEN }}
+
+      - name: Commit and push to aali
+        run: |
+          cd aali
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git config --global user.name '${{ github.actor }}'
+          git commit -a -m 'New release triggered by ${{ github.event.repository.name }}'
+          git push origin main
+
+      - name: Run release script
+        run: |
+          cd aali/scripts/releasehelper
+          go run main.go "release" ${{ github.ref_name }} ${{ secrets.AALI_RELEASE_TOKEN }}
