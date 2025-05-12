@@ -1,17 +1,16 @@
 name: CI/CD
 on:
   pull_request:
-  push:
-    tags:
-      - "*"
     branches:
       - main
-      - vupadhya/mendallie
-
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 env:
   MAIN_PYTHON_VERSION: '3.12'
-  DOCUMENTATION_CNAME: ansys.github.io/allie-flowkit-python
-  PACKAGE_NAME: allie-flowkit-python
+  DOCUMENTATION_CNAME: ansys.github.io/aali-flowkit-python
+  PACKAGE_NAME: aali-flowkit-python
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -35,13 +34,42 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.10', '3.11', '3.12']
-        should-release:
-          - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
-        exclude:
-          - should-release: false
-            os: macos-latest
+        python-version: ['3.9', '3.12']
+        include:
+          # ── Linux
+          - os: ubuntu-latest
+            goos: linux
+            goarch: amd64
+            platform: linux_amd64
+            ext: ""
+          - os: ubuntu-latest
+            goos: linux
+            goarch: arm64
+            platform: linux_arm64
+            ext: ""
+          # ── Windows
+          - os: windows-latest
+            goos: windows
+            goarch: amd64
+            platform: windows_amd64
+            ext: ".exe"
+          - os: windows-latest
+            goos: windows
+            goarch: arm64
+            platform: windows_arm64
+            ext: ".exe"
+          # ── macOS
+          - os: macos-latest
+            goos: darwin
+            goarch: amd64
+            platform: macos_amd64
+            ext: ""
+          - os: macos-latest
+            goos: darwin
+            goarch: arm64
+            platform: macos_arm64
+            ext: ""
+
     steps:
       - name: Build wheelhouse and perform smoke test
         uses: ansys/actions/build-wheelhouse@v9
@@ -66,7 +94,7 @@ jobs:
           WS_APIKEY: '${{secrets.MEND_API_KEY}}'
           WS_USERKEY: '${{ secrets.MEND_USER_KEY }}'
           WS_WSS_URL: 'https://app.whitesourcesoftware.com/agent'
-          WS_PRODUCTNAME: 'AnsysAllie'
+          WS_PRODUCTNAME: 'AnsysAali'
           WS_PROJECTNAME: ${{github.event.repository.name}}
           WS_GENERATEPROJECTDETAILSJSON: true
           WS_GENERATESCANREPORT: true
@@ -240,18 +268,11 @@ jobs:
       - name: Install PyInstaller
         run: pip install pyinstaller
 
-      - name: Set OS name
-        id: os_name
-        shell: bash
-        run: |
-          os_short=$(echo "${{ matrix.os }}" | sed 's/-latest//')
-          echo "os_short=$os_short" >> $GITHUB_OUTPUT
-
       - name: Attempt to build executable
         id: first-attempt
         run: >
-          pyinstaller src/allie/flowkit/__main__.py --onefile
-          --name ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ steps.os_name.outputs.os_short }}
+          pyinstaller src/aali/flowkit/__main__.py --onefile
+          --name ${{ github.event.repository.name }}_${{ matrix.platform }}_${{ github.ref_name }}${{ matrix.ext }}
           --copy-metadata ${{ github.event.repository.name }}
           --hidden-import uvicorn --collect-all uvicorn
           --distpath build/dist --workpath build/build --specpath build
@@ -260,23 +281,23 @@ jobs:
       - name: Modify spec file and retry build
         if: steps.first-attempt.outcome == 'failure'
         run: |
-          echo "import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)" >> ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ steps.os_name.outputs.os_short }}.spec
-          pyinstaller ${{ github.event.repository.name }}-${{ github.ref_name }}-${{ steps.os_name.outputs.os_short }}.spec
+          echo "import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)" >> ${{ github.event.repository.name }}_${{ matrix.platform }}_${{ github.ref_name }}${{ matrix.ext }}.spec
+          pyinstaller ${{ github.event.repository.name }}_${{ matrix.platform }}_${{ github.ref_name }}${{ matrix.ext }}.spec
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os }}-binaries
-          path: build/dist/${{ github.event.repository.name }}-*
+          name: ${{ matrix.platform }}_binaries
+          path: build/dist/${{ github.event.repository.name }}_${{ matrix.platform }}_*
 
-  sign-windows-binary:
-    name: Sign Windows binary
+  sign-windows-binaries:
+    name: Sign Windows binaries
     needs: [binaries]
     runs-on:
         group: ansys-network
         labels: [self-hosted, Windows, signtool]
     steps:
-      - name: Checkout the SignTool
+      - name: Checkout SignTool
         uses: actions/checkout@v4
         with:
             repository: ansys/signtool-ansys-apps
@@ -290,53 +311,93 @@ jobs:
       - name: List current structure
         run: ls -R
 
-      - name: Sign application
+      - name: Sign Windows Executables
         working-directory: signtool
         run: |
-            $filename = (get-ChildItem installer -recurse | where {$_.name -like "allie-flowkit-python*"}).Name
-            $jobname = $filename -replace ".{4}$"
-            .\Ansys.SignClient.exe sign `
-            --signUrl https://csign.ansys.com `
-            -r gh_signtool_account `
-            -s '${{ secrets.SIGNTOOL_PWD }}' `
-            -n $jobname `
-            -i installer/$filename `
-            -o installer/$filename
+            # collect every .exe that came from the download‑artifact step
+            $files = Get-ChildItem installer -Recurse -Filter "*.exe"
+            if ($files.Count -eq 0) {
+                Write-Error "❌  No Windows executables found in signtool/installer — signing aborted."
+                exit 1               # → step fails → job fails → workflow fails
+            }
+            # Create dist directory if it doesn't exist
+            if (!(Test-Path installer/dist)) {
+                New-Item -ItemType Directory -Path installer/dist
+            }
+            foreach ($file in $files) {
+                $jobname = $file.BaseName
+                $destFile = "installer/dist/$($file.Name)"
+                .\Ansys.SignClient.exe sign --signUrl https://csign.ansys.com -r gh_signtool_account -s '${{ secrets.SIGNTOOL_PWD }}' -n $jobname -i $file.FullName -o $file.FullName
+                # Copy the signed file to the dist directory
+                Copy-Item -Path $file.FullName -Destination $destFile
+            }
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload signed Windows artifacts
+        uses: actions/upload-artifact@v4
         with:
-            name: windows-latest-binaries-signed
-            path: signtool/installer/*.exe
+            name: windows-binaries-signed
+            path: signtool/installer/dist/*
+            if-no-files-found: error
   release:
-    name: Create release
-    needs: [sign-windows-binary, binaries]
+    needs: [sign-windows-binaries]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        - uses: actions/checkout@v4
 
-      - name: Download Windows binaries
-        uses: actions/download-artifact@v4
-        with:
-          name: windows-latest-binaries-signed
-          path: dist
+        # Directory to collect all binaries
+        - name: Create release directory
+          run: mkdir -p release_files
 
-      - name: Download Linux binaries
-        uses: actions/download-artifact@v4
-        with:
-          name: ubuntu-latest-binaries
-          path: dist
+        # Download all artifacts to the release directory
+        - uses: actions/download-artifact@v4
+          with:
+            pattern: "*_binaries*"
+            path: release_files
+            merge-multiple: true
 
-      - name: Download MacOS binaries
-        uses: actions/download-artifact@v4
-        with:
-          name: macos-latest-binaries
-          path: dist
+        # List all files for verification
+        - name: Verify collected binaries
+          run: |
+            echo "▼ release_files contains:"
+            find release_files -type f | sort
 
-      - name: Release to GitHub
-        uses: softprops/action-gh-release@v2
+        # Create GitHub release with all files
+        - name: Create GitHub release
+          uses: softprops/action-gh-release@v2
+          with:
+            generate_release_notes: true
+            fail_on_unmatched_files: false
+            files: |
+              release_files/**/${{ github.event.repository.name }}_*_${{ github.ref_name }}*
+
+  main-repo-release:
+    name: Update main aali repo and create release
+    needs: [release, docker]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout aali repository
+        run: |
+          git clone --branch main https://${{ secrets.PYANSYS_CI_BOT_TOKEN }}@github.com/ansys/aali.git
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
         with:
-          fail_on_unmatched_files: true
-          generate_release_notes: true
-          files: |
-            dist/${{ github.event.repository.name }}-**
+          go-version-file: 'aali/scripts/releasehelper/go.mod'
+
+      - name: Run tag script
+        run: |
+          cd aali/scripts/releasehelper
+          go run main.go "tag" ${{ github.ref_name }} ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+
+      - name: Commit and push to aali
+        run: |
+          cd aali
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git config --global user.name '${{ github.actor }}'
+          git commit -a -m 'New release triggered by ${{ github.event.repository.name }}'
+          git push origin main
+
+      - name: Run release script
+        run: |
+          cd aali/scripts/releasehelper
+          go run main.go "release" ${{ github.ref_name }} ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
