@@ -372,7 +372,7 @@ jobs:
 
   main-repo-release:
     name: Update main aali repo and create release
-    needs: [release, docker]
+    needs: [release, release-docker]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout aali repository
