@@ -9,8 +9,8 @@ on:
 
 env:
   MAIN_PYTHON_VERSION: '3.12'
-  DOCUMENTATION_CNAME: ansys.github.io/allie-flowkit-python
-  PACKAGE_NAME: allie-flowkit-python
+  DOCUMENTATION_CNAME: ansys.github.io/aali-flowkit-python
+  PACKAGE_NAME: aali-flowkit-python
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -94,7 +94,7 @@ jobs:
           WS_APIKEY: '${{secrets.MEND_API_KEY}}'
           WS_USERKEY: '${{ secrets.MEND_USER_KEY }}'
           WS_WSS_URL: 'https://app.whitesourcesoftware.com/agent'
-          WS_PRODUCTNAME: 'AnsysAllie'
+          WS_PRODUCTNAME: 'AnsysAali'
           WS_PROJECTNAME: ${{github.event.repository.name}}
           WS_GENERATEPROJECTDETAILSJSON: true
           WS_GENERATESCANREPORT: true
