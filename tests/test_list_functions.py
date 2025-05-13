@@ -23,7 +23,7 @@
 
 import re
 
-from allie.flowkit import flowkit_service
+from aali.flowkit import flowkit_service
 from fastapi.testclient import TestClient
 import pytest
 

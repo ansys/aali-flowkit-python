@@ -25,7 +25,7 @@
 import inspect
 from typing import Any, get_type_hints
 
-from allie.flowkit.models.functions import EndpointInfo, ParameterInfo
+from aali.flowkit.models.functions import EndpointInfo, ParameterInfo
 from fastapi.routing import APIRoute
 from pydantic import BaseModel
 
