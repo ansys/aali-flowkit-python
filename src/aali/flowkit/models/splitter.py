@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,45 +20,34 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Decorators module for function definitions."""
+"""Model for the splitter endpoint."""
 
-import asyncio
-from functools import wraps
-
-
-def category(value: str):
-    """Decorator to add a category to the function."""
-
-    def decorator(func):
-        func.category = value
-
-        @wraps(func)
-        async def async_wrapper(*args, **kwargs):
-            # Check if function is async
-            if asyncio.iscoroutinefunction(func):
-                return await func(*args, **kwargs)
-            else:
-                return func(*args, **kwargs)
-
-        return async_wrapper
-
-    return decorator
+from pydantic import BaseModel
 
 
-def display_name(value: str):
-    """Decorator to add a display name to the function."""
+class SplitterRequest(BaseModel):
+    """Request model for the splitter endpoint.
 
-    def decorator(func):
-        func.display_name = value
+    Parameters
+    ----------
+    BaseModel : pydantic.BaseModel
+        The base model for the request.
 
-        @wraps(func)
-        async def async_wrapper(*args, **kwargs):
-            # Check if function is async
-            if asyncio.iscoroutinefunction(func):
-                return await func(*args, **kwargs)
-            else:
-                return func(*args, **kwargs)
+    """
 
-        return async_wrapper
+    document_content: bytes
+    chunk_size: int
+    chunk_overlap: int
 
-    return decorator
+
+class SplitterResponse(BaseModel):
+    """Response model for the splitter endpoint.
+
+    Parameters
+    ----------
+    BaseModel : pydantic.BaseModel
+        The base model for the response.
+
+    """
+
+    chunks: list[str]

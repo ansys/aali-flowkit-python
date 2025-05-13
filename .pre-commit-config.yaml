@@ -1,4 +1,15 @@
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+
 repos:
+- repo: https://github.com/ansys/pre-commit-hooks
+  rev: v0.5.2
+  hooks:
+  - id: add-license-headers
+    args: ["--start_year", "2025"]
+    files: '.*\.(py|pyi|proto|go)$'
+
 - repo: https://github.com/adamchainz/blacken-docs
   rev: 1.18.0
   hooks:
@@ -25,11 +36,3 @@ repos:
     - id: ruff
       args: [--fix]
     - id: ruff-format
-
-- repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.4.3
-  hooks:
-    - id: add-license-headers
-      files: '(src|examples|tests|docker)/.*\.(py)|\.(proto)'
-      args:
-      - --start_year=2024

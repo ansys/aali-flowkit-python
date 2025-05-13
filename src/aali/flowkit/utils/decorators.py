@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,41 +20,45 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Model for the MechanicalScriptingBot endpoint."""
+"""Decorators module for function definitions."""
 
-from pydantic import BaseModel
-
-
-class MechScriptBotRequest(BaseModel):
-    """Request model for the MechanicalScriptingBot endpoint.
-
-    Parameters
-    ----------
-    BaseModel : pydantic.BaseModel
-        The base model for the request.
-
-    """
-
-    question: str
-    mech_script_bot_url: str
-    full_human_memory: list[str]
-    full_ai_memory: list[str]
-    full_variables: list[str]
-    full_mechanical_objects: list[str]
+import asyncio
+from functools import wraps
 
 
-class MechScriptBotResponse(BaseModel):
-    """Response model for the MechanicalScriptingBot endpoint.
+def category(value: str):
+    """Decorator to add a category to the function."""
 
-    Parameters
-    ----------
-    BaseModel : pydantic.BaseModel
-        The base model for the response.
+    def decorator(func):
+        func.category = value
 
-    """
+        @wraps(func)
+        async def async_wrapper(*args, **kwargs):
+            # Check if function is async
+            if asyncio.iscoroutinefunction(func):
+                return await func(*args, **kwargs)
+            else:
+                return func(*args, **kwargs)
 
-    output: str
-    updated_human_memory: list[str]
-    updated_ai_memory: list[str]
-    updated_variables: list[str]
-    updated_mechanical_objects: list[str]
+        return async_wrapper
+
+    return decorator
+
+
+def display_name(value: str):
+    """Decorator to add a display name to the function."""
+
+    def decorator(func):
+        func.display_name = value
+
+        @wraps(func)
+        async def async_wrapper(*args, **kwargs):
+            # Check if function is async
+            if asyncio.iscoroutinefunction(func):
+                return await func(*args, **kwargs)
+            else:
+                return func(*args, **kwargs)
+
+        return async_wrapper
+
+    return decorator

@@ -45,3 +45,6 @@ config.yaml
 # Docs
 doc/_build/
 doc/source/api/
+tests/test_files/.status
+
+tests/test_files/.!*

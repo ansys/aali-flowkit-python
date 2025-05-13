@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,4 +20,41 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Endpoints package responsible for defining the endpoints."""
+"""Model for the MechanicalScriptingBot endpoint."""
+
+from pydantic import BaseModel
+
+
+class MechScriptBotRequest(BaseModel):
+    """Request model for the MechanicalScriptingBot endpoint.
+
+    Parameters
+    ----------
+    BaseModel : pydantic.BaseModel
+        The base model for the request.
+
+    """
+
+    question: str
+    mech_script_bot_url: str
+    full_human_memory: list[str]
+    full_ai_memory: list[str]
+    full_variables: list[str]
+    full_mechanical_objects: list[str]
+
+
+class MechScriptBotResponse(BaseModel):
+    """Response model for the MechanicalScriptingBot endpoint.
+
+    Parameters
+    ----------
+    BaseModel : pydantic.BaseModel
+        The base model for the response.
+
+    """
+
+    output: str
+    updated_human_memory: list[str]
+    updated_ai_memory: list[str]
+    updated_variables: list[str]
+    updated_mechanical_objects: list[str]

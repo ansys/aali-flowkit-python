@@ -1,9 +1,31 @@
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 """Sphinx documentation configuration file."""
 
 from datetime import datetime
 import os
 
-from allie.flowkit import __version__
+from aali.flowkit import __version__
 from ansys_sphinx_theme import (
     ansys_favicon,
     ansys_logo_white,
@@ -17,22 +39,22 @@ from sphinx.builders.latex import LaTeXBuilder
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
 # Project information
-project = "allie-flowkit-python"
+project = "aali-flowkit-python"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "ANSYS, Inc."
 release = version = __version__
-cname = os.getenv("DOCUMENTATION_CNAME", default="ansys.github.io/allie-flowkit-python")
+cname = os.getenv("DOCUMENTATION_CNAME", default="ansys.github.io/aali-flowkit-python")
 switcher_version = get_version_match(__version__)
 
 # Select desired logo, theme, and declare the html title
 html_theme = "ansys_sphinx_theme"
-html_short_title = html_title = "Allie Flowkit Python"
+html_short_title = html_title = "Aali Flowkit Python"
 html_baseurl = f"https://{cname}/version/stable"
 
 # specify the location of your github repo
 html_context = {
     "github_user": "ansys",
-    "github_repo": "allie-flowkit-python",
+    "github_repo": "aali-flowkit-python",
     "github_version": "main",
     "doc_path": "doc/source",
 }
@@ -43,7 +65,7 @@ html_theme_options = {
         "version_match": switcher_version,
     },
     "check_switcher": False,
-    "github_url": "https://github.com/ansys/allie-flowkit-python",
+    "github_url": "https://github.com/ansys/aali-flowkit-python",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "collapse_navigation": True,
@@ -54,17 +76,17 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "Support",
-            "url": "https://github.com/ansys/allie-flowkit-python/discussions",
+            "url": "https://github.com/ansys/aali-flowkit-python/discussions",
             "icon": "fa fa-comment fa-fw",
         },
         {
             "name": "Download documentation in PDF",
-            "url": f"https://{cname}/version/{switcher_version}/_static/assets/download/allie-flowkit-python.pdf",  # noqa: E501
+            "url": f"https://{cname}/version/{switcher_version}/_static/assets/download/aali-flowkit-python.pdf",  # noqa: E501
             "icon": "fa fa-file-pdf fa-fw",
         },
     ],
     "ansys_sphinx_theme_autoapi": {
-        "project": "Allie Flowkit Python",
+        "project": "Aali Flowkit Python",
         "output": "api",
         "use_implicit_namespaces": True,
         "directory": "src",
@@ -110,7 +132,7 @@ sphinx_gallery_conf = {
     # directory where function granular galleries are stored
     "backreferences_dir": None,
     # Modules for which function level galleries are created.  In
-    "doc_module": "allie-flowkit-python",
+    "doc_module": "aali-flowkit-python",
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
     "remove_config_comments": True,
@@ -178,7 +200,7 @@ latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
 linkcheck_exclude_documents = ["index", "getting_started/local/index", "assets"]
-linkcheck_ignore = ["https://github.com/ansys/allie-flowkit-python/"]
+linkcheck_ignore = ["https://github.com/ansys/aali-flowkit-python/"]
 # -- Declare the Jinja context -----------------------------------------------
 exclude_patterns = [
     "examples/**/*.ipynb",

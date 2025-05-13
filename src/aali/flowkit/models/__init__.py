@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,34 +20,4 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Model for the splitter endpoint."""
-
-from pydantic import BaseModel
-
-
-class SplitterRequest(BaseModel):
-    """Request model for the splitter endpoint.
-
-    Parameters
-    ----------
-    BaseModel : pydantic.BaseModel
-        The base model for the request.
-
-    """
-
-    document_content: bytes
-    chunk_size: int
-    chunk_overlap: int
-
-
-class SplitterResponse(BaseModel):
-    """Response model for the splitter endpoint.
-
-    Parameters
-    ----------
-    BaseModel : pydantic.BaseModel
-        The base model for the response.
-
-    """
-
-    chunks: list[str]
+"""Models package used to define the data models."""

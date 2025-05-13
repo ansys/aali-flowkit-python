@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -23,10 +23,10 @@
 """Main module for the FlowKit service."""
 
 try:
-    from allie.flowkit.config._config import CONFIG
+    from aali.flowkit.config._config import CONFIG
     import uvicorn
 except ImportError:
-    raise ImportError("Please install uvicorn to run the service: pip install allie-flowkit-python[all]")
+    raise ImportError("Please install uvicorn to run the service: pip install aali-flowkit-python[all]")
 import argparse
 from urllib.parse import urlparse
 
@@ -67,7 +67,7 @@ def main():
 
     # Run the service
     uvicorn.run(
-        "allie.flowkit.flowkit_service:flowkit_service",
+        "aali.flowkit.flowkit_service:flowkit_service",
         host="0.0.0.0",
         port=port,
         workers=CONFIG.flowkit_python_workers,

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -20,10 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""App package responsible for creating the FastAPI app."""
+"""Configuration package for the application."""
 
-import importlib.metadata as importlib_metadata
-
-__version__ = importlib_metadata.version("allie-flowkit-python")
-
-from allie.flowkit.flowkit_service import flowkit_service  # noqa F401
+from aali.flowkit.config._config import CONFIG  # noqa F401

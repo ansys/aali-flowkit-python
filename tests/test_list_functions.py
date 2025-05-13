@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -23,7 +23,7 @@
 
 import re
 
-from allie.flowkit import flowkit_service
+from aali.flowkit import flowkit_service
 from fastapi.testclient import TestClient
 import pytest
 

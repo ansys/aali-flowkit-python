@@ -6,28 +6,28 @@ Contribute
 Overall guidance on contributing to a PyAnsys library appears in the
 `Contributing <https://dev.docs.pyansys.com/how-to/contributing.html>`_ topic
 in the *PyAnsys developer's guide*. Ensure that you are thoroughly familiar
-with this guide before attempting to contribute to the Allie Flowkit Python.
+with this guide before attempting to contribute to the Aali Flowkit Python.
 
-The following contribution information is specific to the Allie Flowkit Python.
+The following contribution information is specific to the Aali Flowkit Python.
 
 
 Clone the repository
 --------------------
 
-To clone and install the latest *Allie Flowkit Python* release in development mode, run
+To clone and install the latest *Aali Flowkit Python* release in development mode, run
 these commands:
 
 .. code::
 
-    git clone https://github.com/ansys/allie-flowkit-python/
-    cd allie-flowkit-python
+    git clone https://github.com/ansys/aali-flowkit-python/
+    cd aali-flowkit-python
     python -m pip install --upgrade pip
     pip install -e .
 
 Adhere to code style
 --------------------
 
-*Allie Flowkit Python* follows the PEP8 standard as outlined in PEP 8 in the PyAnsys Developer’s Guide and implements style checking using pre-commit.
+*Aali Flowkit Python* follows the PEP8 standard as outlined in PEP 8 in the PyAnsys Developer’s Guide and implements style checking using pre-commit.
 
 To ensure your code meets minimum code styling standards, run these commands:
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -25,10 +25,10 @@
 import base64
 import io
 
-from allie.flowkit.config._config import CONFIG
-from allie.flowkit.models.functions import FunctionCategory
-from allie.flowkit.models.splitter import SplitterRequest, SplitterResponse
-from allie.flowkit.utils.decorators import category, display_name
+from aali.flowkit.config._config import CONFIG
+from aali.flowkit.models.functions import FunctionCategory
+from aali.flowkit.models.splitter import SplitterRequest, SplitterResponse
+from aali.flowkit.utils.decorators import category, display_name
 from fastapi import APIRouter, Header, HTTPException
 from langchain.text_splitter import PythonCodeTextSplitter, RecursiveCharacterTextSplitter
 from pdfminer.high_level import extract_text

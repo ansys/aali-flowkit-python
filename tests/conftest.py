@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -32,5 +32,5 @@ MOCK_API_KEY = "test_api_key"
 @pytest.fixture(autouse=True)
 def mock_api_key():
     """Mock the API key for testing."""
-    with patch("allie.flowkit.config.CONFIG.flowkit_python_api_key", MOCK_API_KEY):
+    with patch("aali.flowkit.config.CONFIG.flowkit_python_api_key", MOCK_API_KEY):
         yield

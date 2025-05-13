@@ -1,4 +1,4 @@
-# Copyright (C) 2024 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,4 +19,54 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-"""Utils module."""
+
+"""Module for defining the models used in the endpoints."""
+
+from enum import Enum
+from typing import Any
+
+from pydantic import BaseModel
+
+
+class ParameterInfo(BaseModel):
+    """Parameter information model.
+
+    Parameters
+    ----------
+    BaseModel : pydantic.BaseModel
+        The base model for the parameter information
+
+    """
+
+    name: str
+    type: str
+
+
+class EndpointInfo(BaseModel):
+    """Endpoint information model.
+
+    Parameters
+    ----------
+    BaseModel : pydantic.BaseModel
+        The base model for the endpoint information
+
+    """
+
+    name: str
+    path: str
+    category: str
+    display_name: str
+    description: str
+    inputs: list[ParameterInfo]
+    outputs: list[ParameterInfo]
+    definitions: dict[str, Any]
+
+
+class FunctionCategory(Enum):
+    """Enum for function categories."""
+
+    DATA_EXTRACTION = "data_extraction"
+    GENERIC = "generic"
+    KNOWLEDGE_DB = "knowledge_db"
+    LLM_HANDLER = "llm_handler"
+    ANSYS_GPT = "ansys_gpt"
