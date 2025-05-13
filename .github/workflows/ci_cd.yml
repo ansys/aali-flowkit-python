@@ -289,7 +289,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.platform }}_binaries
+          name: ${{ matrix.os }}-binaries
           path: build/dist/${{ github.event.repository.name }}_${{ matrix.platform }}_*
 
   sign-windows-binaries:
