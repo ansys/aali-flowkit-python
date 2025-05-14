@@ -22,7 +22,41 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-          os: [windows-latest, ubuntu-latest, macos-latest]
+        include:
+          # ── Linux
+          - os: ubuntu-latest
+            goos: linux
+            goarch: amd64
+            platform: linux_amd64
+            ext: ""
+          - os: ubuntu-latest
+            goos: linux
+            goarch: arm64
+            platform: linux_arm64
+            ext: ""
+          # ── Windows
+          - os: windows-latest
+            goos: windows
+            goarch: amd64
+            platform: windows_amd64
+            ext: ".exe"
+          - os: windows-latest
+            goos: windows
+            goarch: arm64
+            platform: windows_arm64
+            ext: ".exe"
+          # ── macOS
+          - os: macos-latest
+            goos: darwin
+            goarch: amd64
+            platform: macos_amd64
+            ext: ""
+          - os: macos-latest
+            goos: darwin
+            goarch: arm64
+            platform: macos_arm64
+            ext: ""
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
