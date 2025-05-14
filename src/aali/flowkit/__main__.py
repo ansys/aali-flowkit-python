@@ -40,7 +40,8 @@ def parse_cli_args():
     parser.add_argument("--use-ssl", required=False, help="Enable SSL for the service. By default False")
     parser.add_argument("--ssl-keyfile", type=str, required=False, help="The SSL key file path")
     parser.add_argument("--ssl-certfile", type=str, required=False, help="The SSL certificate file path")
-    return parser.parse_args()
+    args, _ = parser.parse_known_args()
+    return args
 
 
 def substitute_empty_values(args):
