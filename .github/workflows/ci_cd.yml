@@ -254,7 +254,41 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-          os: [windows-latest, ubuntu-latest, macos-latest]
+        include:
+          # ── Linux
+          - os: ubuntu-latest
+            goos: linux
+            goarch: amd64
+            platform: linux_amd64
+            ext: ""
+          - os: ubuntu-latest
+            goos: linux
+            goarch: arm64
+            platform: linux_arm64
+            ext: ""
+          # ── Windows
+          - os: windows-latest
+            goos: windows
+            goarch: amd64
+            platform: windows_amd64
+            ext: ".exe"
+          - os: windows-latest
+            goos: windows
+            goarch: arm64
+            platform: windows_arm64
+            ext: ".exe"
+          # ── macOS
+          - os: macos-latest
+            goos: darwin
+            goarch: amd64
+            platform: macos_amd64
+            ext: ""
+          - os: macos-latest
+            goos: darwin
+            goarch: arm64
+            platform: macos_arm64
+            ext: ""
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -289,47 +323,57 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.os }}-binaries
+          name: ${{ matrix.platform }}_binaries
           path: build/dist/${{ github.event.repository.name }}_${{ matrix.platform }}_*
 
   sign-windows-binaries:
     name: Sign Windows binaries
     needs: [binaries]
     runs-on:
-        group: ansys-network
-        labels: [self-hosted, Windows, signtool]
+      group: ansys-network
+      labels: [self-hosted, Windows, signtool]
     steps:
       - name: Checkout SignTool
         uses: actions/checkout@v4
         with:
-            repository: ansys/signtool-ansys-apps
-            token: ${{ secrets.SIGNTOOL_ACCESS_TOKEN }}
+          repository: ansys-internal/signtool-ansys-apps
+          token: ${{ secrets.SIGNTOOL_ACCESS_TOKEN }}
 
-      - uses: actions/download-artifact@v4
+      - name: Download Windows artifacts
+        uses: actions/download-artifact@v4
         with:
-            name: windows-latest-binaries
-            path: signtool/installer
+          pattern: windows_*_binaries
+          path: signtool/installer
 
-      - name: List current structure
-        run: ls -R
+      - name: List contents
+        run: ls -R signtool/installer
 
-      - name: Sign Windows Executables
+      - name: Create dist directory
+        shell: pwsh
+        run: mkdir -p signtool/installer/dist
+
+      - name: Sign Windows executables
         working-directory: signtool
+        shell: pwsh
         run: |
             # collect every .exe that came from the download‑artifact step
             $files = Get-ChildItem installer -Recurse -Filter "*.exe"
+
             if ($files.Count -eq 0) {
                 Write-Error "❌  No Windows executables found in signtool/installer — signing aborted."
                 exit 1               # → step fails → job fails → workflow fails
             }
+
             # Create dist directory if it doesn't exist
             if (!(Test-Path installer/dist)) {
                 New-Item -ItemType Directory -Path installer/dist
             }
+
             foreach ($file in $files) {
                 $jobname = $file.BaseName
                 $destFile = "installer/dist/$($file.Name)"
                 .\Ansys.SignClient.exe sign --signUrl https://csign.ansys.com -r gh_signtool_account -s '${{ secrets.SIGNTOOL_PWD }}' -n $jobname -i $file.FullName -o $file.FullName
+
                 # Copy the signed file to the dist directory
                 Copy-Item -Path $file.FullName -Destination $destFile
             }
@@ -337,40 +381,41 @@ jobs:
       - name: Upload signed Windows artifacts
         uses: actions/upload-artifact@v4
         with:
-            name: windows-binaries-signed
-            path: signtool/installer/dist/*
-            if-no-files-found: error
+          name: windows-binaries-signed
+          path: signtool/installer/dist/*
+          if-no-files-found: error
+
   release:
     needs: [sign-windows-binaries]
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-        # Directory to collect all binaries
-        - name: Create release directory
-          run: mkdir -p release_files
+      # Create a directory to collect all binaries
+      - name: Create release directory
+        run: mkdir -p release_files
 
-        # Download all artifacts to the release directory
-        - uses: actions/download-artifact@v4
-          with:
-            pattern: "*_binaries*"
-            path: release_files
-            merge-multiple: true
+      # Download all artifacts to the release directory
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: "*_binaries*"
+          path: release_files
+          merge-multiple: true
 
-        # List all files for verification
-        - name: Verify collected binaries
-          run: |
-            echo "▼ release_files contains:"
-            find release_files -type f | sort
+      # List all files for verification
+      - name: Verify collected binaries
+        run: |
+          echo "▼ release_files contains:"
+          find release_files -type f | sort
 
-        # Create GitHub release with all files
-        - name: Create GitHub release
-          uses: softprops/action-gh-release@v2
-          with:
-            generate_release_notes: true
-            fail_on_unmatched_files: false
-            files: |
-              release_files/**/${{ github.event.repository.name }}_*_${{ github.ref_name }}*
+      # Create GitHub release with all files
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          fail_on_unmatched_files: false
+          files: |
+            release_files/**/${{ github.event.repository.name }}_*_${{ github.ref_name }}*
 
   main-repo-release:
     name: Update main aali repo and create release
