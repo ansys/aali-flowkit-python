@@ -1,0 +1,113 @@
+
+
+:class:`EndpointInfo`
+=====================
+
+.. py:class:: src.aali.flowkit.models.functions.EndpointInfo(/, **data: Any)
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+
+   
+   Endpoint information model.
+
+
+   :Parameters:
+
+       **BaseModel** : :obj:`pydantic.BaseModel`
+           The base model for the endpoint information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: EndpointInfo
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~name`
+            - 
+          * - :py:attr:`~path`
+            - 
+          * - :py:attr:`~category`
+            - 
+          * - :py:attr:`~display_name`
+            - 
+          * - :py:attr:`~description`
+            - 
+          * - :py:attr:`~inputs`
+            - 
+          * - :py:attr:`~outputs`
+            - 
+          * - :py:attr:`~definitions`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from src.aali.flowkit.models.functions import EndpointInfo
+
+
+
+Attribute detail
+----------------
+.. py:attribute:: name
+   :type:  str
+
+.. py:attribute:: path
+   :type:  str
+
+.. py:attribute:: category
+   :type:  str
+
+.. py:attribute:: display_name
+   :type:  str
+
+.. py:attribute:: description
+   :type:  str
+
+.. py:attribute:: inputs
+   :type:  list[ParameterInfo]
+
+.. py:attribute:: outputs
+   :type:  list[ParameterInfo]
+
+.. py:attribute:: definitions
+   :type:  dict[str, Any]
+
+
+
+

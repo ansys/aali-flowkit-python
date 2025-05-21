@@ -1,0 +1,17 @@
+[
+  {
+    "name": "dev",
+    "version": "dev",
+    "url": "https://ansys.github.io/aali-flowkit-python/version/dev/"
+  },
+  {
+    "name": "1.0 (stable)",
+    "version": "1.0",
+    "url": "https://ansys.github.io/aali-flowkit-python/version/stable/"
+  },
+  {
+    "name": "0.1",
+    "version": "0.1",
+    "url": "https://ansys.github.io/aali-flowkit-python/version/0.1/"
+  }
+]

@@ -1,0 +1,125 @@
+
+
+
+
+
+
+The ``decorators.py`` module
+============================
+
+.. py:module:: src.aali.flowkit.utils.decorators
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: decorators
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~category`
+            - Decorator to add a category to the function.
+
+
+          * - :py:obj:`~display_name`
+            - Decorator to add a display name to the function.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Decorators module for function definitions.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: category(value: str)
+
+   
+   Decorator to add a category to the function.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: display_name(value: str)
+
+   
+   Decorator to add a display name to the function.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
