@@ -43,15 +43,19 @@ def parse_cli_args():
     args, _ = parser.parse_known_args()
     return args
 
+
 def handle_legacy_port_config():
     if CONFIG.flowkit_python_address != "":
         return CONFIG.flowkit_python_address
     if CONFIG.flowkit_python_endpoint != "":
         return CONFIG.flowkit_python_endpoint
 
+
 def substitute_empty_values(args):
     """Substitute the empty values with configuration values."""
-    CONFIG.flowkit_python_address = f"{args.host}:{args.port}" if args.host is not None and args.port is not None else CONFIG.flowkit_python_address
+    CONFIG.flowkit_python_address = (
+        f"{args.host}:{args.port}" if args.host is not None and args.port is not None else CONFIG.flowkit_python_address
+    )
     CONFIG.flowkit_python_workers = args.workers or CONFIG.flowkit_python_workers
     CONFIG.use_ssl = (args.use_ssl.lower() == "true") if args.use_ssl is not None else CONFIG.use_ssl
     CONFIG.ssl_cert_private_key_file = args.ssl_keyfile or CONFIG.ssl_cert_private_key_file
@@ -70,8 +74,8 @@ def main():
 
     address = handle_legacy_port_config()
     # Add scheme if missing
-    if not address.startswith(('http://', 'https://')):
-        address = 'http://' + address
+    if not address.startswith(("http://", "https://")):
+        address = "http://" + address
     host = urlparse(address).hostname
     port = urlparse(address).port
 
