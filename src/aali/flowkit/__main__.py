@@ -45,6 +45,7 @@ def parse_cli_args():
 
 
 def handle_legacy_port_config():
+    """Handle legacy port configuration."""
     if CONFIG.flowkit_python_address != "":
         return CONFIG.flowkit_python_address
     if CONFIG.flowkit_python_endpoint != "":
