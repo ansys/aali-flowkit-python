@@ -65,6 +65,7 @@ class Config:
 
         # Define the configuration variables to be parsed from the YAML file
         self.flowkit_python_api_key = str(self._yaml.get("FLOWKIT_PYTHON_API_KEY", ""))
+        self.flowkit_python_address = str(self._yaml.get("FLOWKIT_PYTHON_ADDRESS"))
         self.flowkit_python_endpoint = str(self._yaml.get("FLOWKIT_PYTHON_ENDPOINT", "http://localhost:50052"))
         self.flowkit_python_workers = int(self._yaml.get("FLOWKIT_PYTHON_WORKERS", 4))
         self.use_ssl = bool(self._yaml.get("USE_SSL", False))
