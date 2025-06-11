@@ -34,9 +34,15 @@ from urllib.parse import urlparse
 def parse_cli_args():
     """Parse the command line arguments."""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--host", type=str, required=False, default="0.0.0.0", help="The host to run the service on. By default 0.0.0.0")
-    parser.add_argument("--port", type=int, required=False, default="50052", help="The port to run the service on. By default 50052")
-    parser.add_argument("--workers", type=int, required=False, default="4", help="The number of workers to use. By default 4")
+    parser.add_argument(
+        "--host", type=str, required=False, default="0.0.0.0", help="The host to run the service on. By default 0.0.0.0"
+    )
+    parser.add_argument(
+        "--port", type=int, required=False, default="50052", help="The port to run the service on. By default 50052"
+    )
+    parser.add_argument(
+        "--workers", type=int, required=False, default="4", help="The number of workers to use. By default 4"
+    )
     parser.add_argument("--use-ssl", required=False, default=False, help="Enable SSL for the service. By default False")
     parser.add_argument("--ssl-keyfile", type=str, required=False, help="The SSL key file path")
     parser.add_argument("--ssl-certfile", type=str, required=False, help="The SSL certificate file path")
@@ -76,7 +82,7 @@ def main():
     address = handle_legacy_port_config()
     # # Add scheme if missing
     if not address.startswith(("http://", "https://")):
-         address = "http://" + address
+        address = "http://" + address
     host = urlparse(address).hostname or args.host
     port = urlparse(address).port or args.port
 
