@@ -34,10 +34,10 @@ from urllib.parse import urlparse
 def parse_cli_args():
     """Parse the command line arguments."""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--host", type=str, required=False, help="The host to run the service on. By default 0.0.0.0")
-    parser.add_argument("--port", type=int, required=False, help="The port to run the service on. By default 50052")
-    parser.add_argument("--workers", type=int, required=False, help="The number of workers to use. By default 4")
-    parser.add_argument("--use-ssl", required=False, help="Enable SSL for the service. By default False")
+    parser.add_argument("--host", type=str, required=False, default="0.0.0.0", help="The host to run the service on. By default 0.0.0.0")
+    parser.add_argument("--port", type=int, required=False, default="50052", help="The port to run the service on. By default 50052")
+    parser.add_argument("--workers", type=int, required=False, default="4", help="The number of workers to use. By default 4")
+    parser.add_argument("--use-ssl", required=False, default=False, help="Enable SSL for the service. By default False")
     parser.add_argument("--ssl-keyfile", type=str, required=False, help="The SSL key file path")
     parser.add_argument("--ssl-certfile", type=str, required=False, help="The SSL certificate file path")
     args, _ = parser.parse_known_args()
@@ -46,9 +46,9 @@ def parse_cli_args():
 
 def handle_legacy_port_config():
     """Handle legacy port configuration."""
-    if CONFIG.flowkit_python_address != "":
+    if CONFIG.flowkit_python_address != "" or CONFIG.flowkit_python_address:
         return CONFIG.flowkit_python_address
-    if CONFIG.flowkit_python_endpoint != "":
+    if CONFIG.flowkit_python_endpoint != "" or CONFIG.flowkit_python_endpoint:
         return CONFIG.flowkit_python_endpoint
 
 
@@ -58,7 +58,7 @@ def substitute_empty_values(args):
         f"{args.host}:{args.port}" if args.host is not None and args.port is not None else CONFIG.flowkit_python_address
     )
     CONFIG.flowkit_python_workers = args.workers or CONFIG.flowkit_python_workers
-    CONFIG.use_ssl = (args.use_ssl.lower() == "true") if args.use_ssl is not None else CONFIG.use_ssl
+    CONFIG.use_ssl = args.use_ssl or CONFIG.use_ssl
     CONFIG.ssl_cert_private_key_file = args.ssl_keyfile or CONFIG.ssl_cert_private_key_file
     CONFIG.ssl_cert_public_key_file = args.ssl_certfile or CONFIG.ssl_cert_public_key_file
     return
@@ -74,11 +74,11 @@ def main():
         substitute_empty_values(args)
 
     address = handle_legacy_port_config()
-    # Add scheme if missing
+    # # Add scheme if missing
     if not address.startswith(("http://", "https://")):
-        address = "http://" + address
-    host = urlparse(address).hostname
-    port = urlparse(address).port
+         address = "http://" + address
+    host = urlparse(address).hostname or args.host
+    port = urlparse(address).port or args.port
 
     # Run the service
     uvicorn.run(
