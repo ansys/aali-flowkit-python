@@ -1,0 +1,107 @@
+
+
+
+
+
+
+The ``functions.py`` module
+===========================
+
+.. py:module:: src.aali.flowkit.models.functions
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: functions
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~src.aali.flowkit.models.functions.ParameterInfo`
+            - Parameter information model.
+
+
+          * - :py:obj:`~src.aali.flowkit.models.functions.EndpointInfo`
+            - Endpoint information model.
+
+
+
+    .. tab-item:: Enums
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~src.aali.flowkit.models.functions.FunctionCategory`
+            - Enum for function categories.
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> ParameterInfo</api/src/aali/flowkit/models/functions/ParameterInfo>
+    <span class="nf nf-cod-symbol_class"></span> EndpointInfo</api/src/aali/flowkit/models/functions/EndpointInfo>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_enum"></span> FunctionCategory</api/src/aali/flowkit/models/functions/FunctionCategory>
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for defining the models used in the endpoints.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

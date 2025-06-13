@@ -1,0 +1,97 @@
+
+
+
+
+
+
+The ``endpoints`` package
+=============================
+
+.. py:module:: src.aali.flowkit.endpoints
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: endpoints
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~src.aali.flowkit.endpoints.mechscriptbot`
+            - Module for triggering the MechanicalScriptingBot application.
+
+
+          * - :py:obj:`~src.aali.flowkit.endpoints.splitter`
+            - Module for splitting text into chunks.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> mechscriptbot</api/src/aali/flowkit/endpoints/mechscriptbot/index>
+    <span class="nf nf-fa-file"></span> splitter</api/src/aali/flowkit/endpoints/splitter/index>
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+
+Endpoints package responsible for defining the endpoints.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
