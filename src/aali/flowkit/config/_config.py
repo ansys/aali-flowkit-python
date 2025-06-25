@@ -110,7 +110,6 @@ class Config:
 
         # 2. Use bundled path if running in a PyInstaller binary
         if getattr(sys, 'frozen', False):
-            # base_dir = Path(sys._MEIPASS)  # type: ignore[attr-defined]
             base_dir =  Path(sys.executable).resolve().parent
             # To help with pyinstaller packaging, for the aali standalone installer
             search_paths.append(base_dir / "configs" / "config.yaml")
