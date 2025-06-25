@@ -24,8 +24,8 @@
 
 import json
 import os
-import sys
 from pathlib import Path
+import sys
 
 from azure.identity import ManagedIdentityCredential
 from azure.keyvault.secrets import SecretClient
@@ -109,8 +109,8 @@ class Config:
             search_paths.append(Path(config_path))
 
         # 2. Use bundled path if running in a PyInstaller binary
-        if getattr(sys, 'frozen', False):
-            base_dir =  Path(sys.executable).resolve().parent
+        if getattr(sys, "frozen", False):
+            base_dir = Path(sys.executable).resolve().parent
             # To help with pyinstaller packaging, for the aali standalone installer
             search_paths.append(base_dir / "configs" / "config.yaml")
             search_paths.append(base_dir / "config.yaml")

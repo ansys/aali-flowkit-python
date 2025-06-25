@@ -28,8 +28,8 @@ try:
 except ImportError:
     raise ImportError("Please install uvicorn to run the service: pip install aali-flowkit-python[all]")
 import argparse
-from urllib.parse import urlparse
 import multiprocessing
+from urllib.parse import urlparse
 
 
 def parse_cli_args():
