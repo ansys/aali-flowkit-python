@@ -24,6 +24,7 @@
 
 import json
 import os
+import sys
 from pathlib import Path
 
 from azure.identity import ManagedIdentityCredential
@@ -84,7 +85,7 @@ class Config:
             raise ValueError("FLOWKIT_PYTHON_API_KEY is missing in the configuration file.")
 
     def _load_config(self, config_path: str) -> dict:
-        """Read the YAML configuration file.
+        """Read the YAML configuration file, while handling the PyInstaller frozen mode.
 
         Parameters
         ----------
@@ -99,23 +100,34 @@ class Config:
         Raises
         ------
         FileNotFoundError
-            If the configuration file is not found at the given path.
-
+            If the configuration file is not found at any valid path.
         """
-        try:
-            with Path(config_path).open("r") as file:
-                return yaml.safe_load(file)
-        except FileNotFoundError:
-            print(f"Configuration file not found at: {config_path}, using default location.")
+        search_paths = []
+
+        # 1. Use explicitly set path first
+        if config_path:
+            search_paths.append(Path(config_path))
+
+        # 2. Use bundled path if running in a PyInstaller binary
+        if getattr(sys, 'frozen', False):
+            # base_dir = Path(sys._MEIPASS)  # type: ignore[attr-defined]
+            base_dir =  Path(sys.executable).resolve().parent
+            # To help with pyinstaller packaging, for the aali standalone installer
+            search_paths.append(base_dir / "configs" / "config.yaml")
+            search_paths.append(base_dir / "config.yaml")
+
+        # 3. Fallbacks for local dev
+        search_paths.append(Path("configs/config.yaml"))
+        search_paths.append(Path("../../configs/config.yaml"))
+
+        for path in search_paths:
             try:
-                with Path("configs/config.yaml").open("r") as file:
+                with path.open("r") as file:
                     return yaml.safe_load(file)
             except FileNotFoundError:
-                try:
-                    with Path("../../configs/config.yaml").open("r") as file:
-                        return yaml.safe_load(file)
-                except FileNotFoundError:
-                    raise FileNotFoundError("Configuration file not found at the default location.")
+                continue
+
+        raise FileNotFoundError("Configuration file not found at any default location.")
 
     def _get_config_from_azure_key_vault(self):
         """Extract configuration from Azure Key Vault and set attributes."""

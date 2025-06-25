@@ -29,6 +29,7 @@ except ImportError:
     raise ImportError("Please install uvicorn to run the service: pip install aali-flowkit-python[all]")
 import argparse
 from urllib.parse import urlparse
+import multiprocessing
 
 
 def parse_cli_args():
@@ -98,4 +99,5 @@ def main():
 
 
 if __name__ == "__main__":
+    multiprocessing.freeze_support()
     main()
