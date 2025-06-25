@@ -25,7 +25,6 @@
 import json
 import os
 from pathlib import Path
-import sys
 
 from azure.identity import ManagedIdentityCredential
 from azure.keyvault.secrets import SecretClient
@@ -61,7 +60,7 @@ class Config:
             configuration file.
 
         """
-        config_path = os.getenv("Aali_CONFIG_PATH", "config.yaml")
+        config_path = os.getenv("AALI_CONFIG_PATH", os.getenv("Aali_CONFIG_PATH", "config.yaml"))
         self._yaml = self._load_config(config_path)
 
         # Define the configuration variables to be parsed from the YAML file
@@ -102,20 +101,13 @@ class Config:
         FileNotFoundError
             If the configuration file is not found at any valid path.
         """
-        search_paths = []
+        search_paths: list[Path] = []
 
         # 1. Use explicitly set path first
         if config_path:
             search_paths.append(Path(config_path))
 
-        # 2. Use bundled path if running in a PyInstaller binary
-        if getattr(sys, "frozen", False):
-            base_dir = Path(sys.executable).resolve().parent
-            # To help with pyinstaller packaging, for the aali standalone installer
-            search_paths.append(base_dir / "configs" / "config.yaml")
-            search_paths.append(base_dir / "config.yaml")
-
-        # 3. Fallbacks for local dev
+        # 2. Fallbacks for local dev
         search_paths.append(Path("configs/config.yaml"))
         search_paths.append(Path("../../configs/config.yaml"))
 
