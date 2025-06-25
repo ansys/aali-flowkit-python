@@ -84,7 +84,7 @@ class Config:
             raise ValueError("FLOWKIT_PYTHON_API_KEY is missing in the configuration file.")
 
     def _load_config(self, config_path: str) -> dict:
-        """Read the YAML configuration file, while handling the PyInstaller frozen mode.
+        """Read the YAML configuration file.
 
         Parameters
         ----------
@@ -99,7 +99,7 @@ class Config:
         Raises
         ------
         FileNotFoundError
-            If the configuration file is not found at any valid path.
+            If the configuration file is not found at any given path.
         """
         search_paths: list[Path] = []
 
