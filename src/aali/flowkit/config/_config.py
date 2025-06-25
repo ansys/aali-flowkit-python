@@ -60,7 +60,7 @@ class Config:
             configuration file.
 
         """
-        config_path = os.getenv("Aali_CONFIG_PATH", "config.yaml")
+        config_path = os.getenv("AALI_CONFIG_PATH", os.getenv("Aali_CONFIG_PATH", "config.yaml"))
         self._yaml = self._load_config(config_path)
 
         # Define the configuration variables to be parsed from the YAML file
@@ -99,23 +99,26 @@ class Config:
         Raises
         ------
         FileNotFoundError
-            If the configuration file is not found at the given path.
-
+            If the configuration file is not found at any given path.
         """
-        try:
-            with Path(config_path).open("r") as file:
-                return yaml.safe_load(file)
-        except FileNotFoundError:
-            print(f"Configuration file not found at: {config_path}, using default location.")
+        search_paths: list[Path] = []
+
+        # 1. Use explicitly set path first
+        if config_path:
+            search_paths.append(Path(config_path))
+
+        # 2. Fallbacks for local dev
+        search_paths.append(Path("configs/config.yaml"))
+        search_paths.append(Path("../../configs/config.yaml"))
+
+        for path in search_paths:
             try:
-                with Path("configs/config.yaml").open("r") as file:
+                with path.open("r") as file:
                     return yaml.safe_load(file)
             except FileNotFoundError:
-                try:
-                    with Path("../../configs/config.yaml").open("r") as file:
-                        return yaml.safe_load(file)
-                except FileNotFoundError:
-                    raise FileNotFoundError("Configuration file not found at the default location.")
+                continue
+
+        raise FileNotFoundError("Configuration file not found at any default location.")
 
     def _get_config_from_azure_key_vault(self):
         """Extract configuration from Azure Key Vault and set attributes."""
