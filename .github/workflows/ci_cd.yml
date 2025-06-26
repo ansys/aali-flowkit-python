@@ -385,8 +385,28 @@ jobs:
           path: signtool/installer/dist/*
           if-no-files-found: error
 
+  check-tag:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          cache: pip
+      - id: get-tag-version
+        run: echo "TAG_VERSION=$(echo ${{ github.ref_name }} | cut -dv -f2 -)" | tee "$GITHUB_OUTPUT"
+      - name: check package versions match tag
+        run: |
+          pip install '.[ci]'
+          python .ci/check_version_match.py --semver ${{ steps.get-tag-version.outputs.TAG_VERSION }} --pypi-metadata ${{ env.PACKAGE_NAME }}
+      - name: Check if tag is on main branch
+        run: git branch -r --contains ${{ github.ref_name }} | grep origin/main
+
   release:
-    needs: [sign-windows-binaries]
+    needs: [check-tag, sign-windows-binaries]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
