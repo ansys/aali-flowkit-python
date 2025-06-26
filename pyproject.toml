@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "aali-flowkit-python"
-version = "1.0.4"
+version = "1.0.5"
 description = "A Python service for Aali Flowkit."
 readme = "README.md"
 requires-python = ">=3.10,<4"
@@ -50,7 +50,7 @@ doc = [
   "sphinx-gallery==0.17.1",
   "sphinx-jinja==2.0.2",
 ]
-ci = ["packaging==25.0", "semver~=3.0.4"]
+ci = ["packaging==24.2", "semver~=3.0.4"]
 
 [project.urls]
 Source = "https://github.com/ansys/aali-flowkit-python"
