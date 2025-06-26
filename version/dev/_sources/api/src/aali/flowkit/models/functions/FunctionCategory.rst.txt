@@ -1,0 +1,99 @@
+
+
+:class:`FunctionCategory`
+=========================
+
+.. py:class:: src.aali.flowkit.models.functions.FunctionCategory(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Enum for function categories.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: FunctionCategory
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~DATA_EXTRACTION`
+            - 
+          * - :py:attr:`~GENERIC`
+            - 
+          * - :py:attr:`~KNOWLEDGE_DB`
+            - 
+          * - :py:attr:`~LLM_HANDLER`
+            - 
+          * - :py:attr:`~ANSYS_GPT`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from src.aali.flowkit.models.functions import FunctionCategory
+
+
+
+Attribute detail
+----------------
+.. py:attribute:: DATA_EXTRACTION
+   :value: 'data_extraction'
+
+
+.. py:attribute:: GENERIC
+   :value: 'generic'
+
+
+.. py:attribute:: KNOWLEDGE_DB
+   :value: 'knowledge_db'
+
+
+.. py:attribute:: LLM_HANDLER
+   :value: 'llm_handler'
+
+
+.. py:attribute:: ANSYS_GPT
+   :value: 'ansys_gpt'
+
+
+
+
+

@@ -1,0 +1,354 @@
+
+
+
+
+
+
+The ``fastapi_utils.py`` module
+===============================
+
+.. py:module:: src.aali.flowkit.fastapi_utils
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: fastapi_utils
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~extract_field_type`
+            - Extract the field type from a given schema field information.
+
+
+          * - :py:obj:`~extract_fields_from_schema`
+            - Extract fields and their types from a schema.
+
+
+          * - :py:obj:`~get_parameters_info`
+            - Get parameter information from function parameters.
+
+
+          * - :py:obj:`~get_return_type_info`
+            - Get return type information from the function's return type.
+
+
+          * - :py:obj:`~extract_definitions_from_schema`
+            - Extract definitions from a schema.
+
+
+          * - :py:obj:`~get_definitions_from_params`
+            - Get definitions from function parameters.
+
+
+          * - :py:obj:`~get_definitions_from_return_type`
+            - Get definitions from the function's return type.
+
+
+          * - :py:obj:`~extract_endpoint_info`
+            - Extract endpoint information from the given routes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Utils module for FastAPI related operations.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: extract_field_type(field_info: dict)
+
+   
+   Extract the field type from a given schema field information.
+
+
+   :Parameters:
+
+       **field_info** : :class:`python:dict`
+           The field information from the schema.
+
+
+
+   :Returns:
+
+       :class:`python:str`
+           The extracted field type.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: extract_fields_from_schema(schema: dict)
+
+   
+   Extract fields and their types from a schema.
+
+
+   :Parameters:
+
+       **schema** : :class:`python:dict`
+           The schema dictionary.
+
+
+
+   :Returns:
+
+       :class:`python:list`
+           A list of ParameterInfo objects representing the fields.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_parameters_info(params: dict)
+
+   
+   Get parameter information from function parameters.
+
+
+   :Parameters:
+
+       **params** : :class:`python:dict`
+           A dictionary of function parameters.
+
+
+
+   :Returns:
+
+       :class:`python:list`
+           A list of ParameterInfo objects representing the parameters.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_return_type_info(return_type: type[pydantic.BaseModel])
+
+   
+   Get return type information from the function's return type.
+
+
+   :Parameters:
+
+       **return_type** : :obj:`type`\[:obj:`BaseModel`]
+           The return type of the function.
+
+
+
+   :Returns:
+
+       :class:`python:list`
+           A list of ParameterInfo objects representing the return type fields.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: extract_definitions_from_schema(schema: dict) -> dict[str, Any]
+
+   
+   Extract definitions from a schema.
+
+
+   :Parameters:
+
+       **schema** : :class:`python:dict`
+           The schema dictionary.
+
+
+
+   :Returns:
+
+       :class:`python:dict`
+           A dictionary of definitions.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_definitions_from_params(params: dict) -> dict[str, Any]
+
+   
+   Get definitions from function parameters.
+
+
+   :Parameters:
+
+       **params** : :class:`python:dict`
+           A dictionary of function parameters.
+
+
+
+   :Returns:
+
+       :class:`python:dict`
+           A dictionary of definitions extracted from the parameters.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_definitions_from_return_type(return_type: type[pydantic.BaseModel]) -> dict[str, Any]
+
+   
+   Get definitions from the function's return type.
+
+
+   :Parameters:
+
+       **return_type** : :obj:`type`\[:obj:`BaseModel`]
+           The return type of the function.
+
+
+
+   :Returns:
+
+       :class:`python:dict`
+           A dictionary of definitions extracted from the return type.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: extract_endpoint_info(function_map: dict[str, Any], routes: list[fastapi.routing.APIRoute]) -> list[aali.flowkit.models.functions.EndpointInfo]
+
+   
+   Extract endpoint information from the given routes.
+
+
+   :Parameters:
+
+       **function_map** : :class:`python:dict`\[:class:`python:str`, :obj:`Any`]
+           A dictionary mapping function names to their implementations.
+
+       **routes** : :class:`python:list`\[:obj:`APIRoute`]
+           A list of APIRoute objects representing the API routes.
+
+
+
+   :Returns:
+
+       :class:`python:list`
+           A list of EndpointInfo objects representing the endpoints.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+

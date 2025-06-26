@@ -1,0 +1,127 @@
+
+
+
+
+
+
+The ``flowkit_service.py`` module
+=================================
+
+.. py:module:: src.aali.flowkit.flowkit_service
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: flowkit_service
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~list_functions`
+            - List all available functions and their endpoints.
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~flowkit_service`
+            - 
+
+
+          * - :py:obj:`~function_map`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for the Aali Flowkit service.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: list_functions(api_key: str = Header(...)) -> list[aali.flowkit.models.functions.EndpointInfo]
+   :async:
+
+
+   
+   List all available functions and their endpoints.
+
+
+   :Parameters:
+
+       **api_key** : :class:`python:str`
+           The API key for authentication.
+
+
+
+   :Returns:
+
+       :class:`python:list`\[:obj:`EndpointInfo`]
+           A list of EndpointInfo objects representing the endpoints.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: flowkit_service
+
+.. py:data:: function_map
+
+
+
