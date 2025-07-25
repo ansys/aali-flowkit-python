@@ -73,15 +73,15 @@ def substitute_empty_values(args):
 
 def main():
     """Run entrypoint for the FlowKit service."""
-    if not CONFIG.extract_config_from_azure_key_vault:
-        # Parse the command line arguments
-        args = parse_cli_args()
+    # Always parse args, but only use them conditionally
+    args = parse_cli_args()
 
+    if not CONFIG.extract_config_from_azure_key_vault:
         # Substitute the empty values with configuration values
         substitute_empty_values(args)
 
     address = handle_legacy_port_config()
-    # # Add scheme if missing
+    # Add scheme if missing
     if not address.startswith(("http://", "https://")):
         address = "http://" + address
     host = urlparse(address).hostname or args.host
