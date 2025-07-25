@@ -75,7 +75,7 @@ def main():
     """Run entrypoint for the FlowKit service."""
     # Always parse args, but only use them conditionally
     args = parse_cli_args()
-    
+
     if not CONFIG.extract_config_from_azure_key_vault:
         # Substitute the empty values with configuration values
         substitute_empty_values(args)
