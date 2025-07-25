@@ -1,0 +1,124 @@
+
+
+
+
+
+
+The ``mechscriptbot.py`` module
+===============================
+
+.. py:module:: src.aali.flowkit.endpoints.mechscriptbot
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: mechscriptbot
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~triggermechscriptbot`
+            - Endpoint for triggering the MechanicalScriptingBot application.
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~router`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for triggering the MechanicalScriptingBot application.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: triggermechscriptbot(request: aali.flowkit.models.mechscriptbot.MechScriptBotRequest, api_key: str = Header(...)) -> aali.flowkit.models.mechscriptbot.MechScriptBotResponse
+   :async:
+
+
+   
+   Endpoint for triggering the MechanicalScriptingBot application.
+
+
+   :Parameters:
+
+       **request** : :obj:`MechScriptBotRequest`
+           An object containing the input query and other relevant parameters for the MechanicalScriptingBot application.
+
+       **api_key** : :class:`python:str`
+           The API key for authentication.
+
+
+
+   :Returns:
+
+       :obj:`MechScriptBotResponse`
+           An object containing the output and other relevant metadata for the MechanicalScriptingBot application.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: router
+
+
+

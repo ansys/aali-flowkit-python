@@ -1,0 +1,87 @@
+
+
+
+
+
+
+The ``splitter.py`` module
+==========================
+
+.. py:module:: src.aali.flowkit.models.splitter
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: splitter
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~src.aali.flowkit.models.splitter.SplitterRequest`
+            - Request model for the splitter endpoint.
+
+
+          * - :py:obj:`~src.aali.flowkit.models.splitter.SplitterResponse`
+            - Response model for the splitter endpoint.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> SplitterRequest</api/src/aali/flowkit/models/splitter/SplitterRequest>
+    <span class="nf nf-cod-symbol_class"></span> SplitterResponse</api/src/aali/flowkit/models/splitter/SplitterResponse>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Model for the splitter endpoint.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+

@@ -1,0 +1,154 @@
+
+
+
+
+
+
+The ``src.aali.flowkit`` library
+================================
+
+.. py:module:: src.aali.flowkit
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: flowkit
+.. tab-set::
+
+    .. tab-item:: Subpackages
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~src.aali.flowkit.config`
+            - Configuration package for the application.
+
+
+          * - :py:obj:`~src.aali.flowkit.endpoints`
+            - Endpoints package responsible for defining the endpoints.
+
+
+          * - :py:obj:`~src.aali.flowkit.models`
+            - Models package used to define the data models.
+
+
+          * - :py:obj:`~src.aali.flowkit.utils`
+            - Utils module.
+
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~src.aali.flowkit.__main__`
+            - Main module for the FlowKit service.
+
+
+          * - :py:obj:`~src.aali.flowkit.fastapi_utils`
+            - Utils module for FastAPI related operations.
+
+
+          * - :py:obj:`~src.aali.flowkit.flowkit_service`
+            - Module for the Aali Flowkit service.
+
+
+
+
+
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~__version__`
+            - 
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-md-package"></span> config</api/src/aali/flowkit/config/index>
+    <span class="nf nf-md-package"></span> endpoints</api/src/aali/flowkit/endpoints/index>
+    <span class="nf nf-md-package"></span> models</api/src/aali/flowkit/models/index>
+    <span class="nf nf-md-package"></span> utils</api/src/aali/flowkit/utils/index>
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> __main__</api/src/aali/flowkit/__main__/index>
+    <span class="nf nf-fa-file"></span> fastapi_utils</api/src/aali/flowkit/fastapi_utils/index>
+    <span class="nf nf-fa-file"></span> flowkit_service</api/src/aali/flowkit/flowkit_service/index>
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+
+App package responsible for creating the FastAPI app.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: __version__
+
+
+

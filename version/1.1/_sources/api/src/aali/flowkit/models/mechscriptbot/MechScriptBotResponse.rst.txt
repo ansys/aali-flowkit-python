@@ -1,0 +1,98 @@
+
+
+:class:`MechScriptBotResponse`
+==============================
+
+.. py:class:: src.aali.flowkit.models.mechscriptbot.MechScriptBotResponse(/, **data: Any)
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+
+   
+   Response model for the MechanicalScriptingBot endpoint.
+
+
+   :Parameters:
+
+       **BaseModel** : :obj:`pydantic.BaseModel`
+           The base model for the response.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MechScriptBotResponse
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~output`
+            - 
+          * - :py:attr:`~updated_human_memory`
+            - 
+          * - :py:attr:`~updated_ai_memory`
+            - 
+          * - :py:attr:`~updated_variables`
+            - 
+          * - :py:attr:`~updated_mechanical_objects`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from src.aali.flowkit.models.mechscriptbot import MechScriptBotResponse
+
+
+
+Attribute detail
+----------------
+.. py:attribute:: output
+   :type:  str
+
+.. py:attribute:: updated_human_memory
+   :type:  list[str]
+
+.. py:attribute:: updated_ai_memory
+   :type:  list[str]
+
+.. py:attribute:: updated_variables
+   :type:  list[str]
+
+.. py:attribute:: updated_mechanical_objects
+   :type:  list[str]
+
+
+
+

@@ -1,0 +1,6 @@
+User-agent: *
+
+Disallow: /version/1.0
+Disallow: /version/0.1
+
+Sitemap: https://ansys.github.io/aali-flowkit-python/sitemap.xml

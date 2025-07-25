@@ -1,0 +1,102 @@
+
+
+
+
+
+
+The ``models`` package
+==========================
+
+.. py:module:: src.aali.flowkit.models
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: models
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~src.aali.flowkit.models.functions`
+            - Module for defining the models used in the endpoints.
+
+
+          * - :py:obj:`~src.aali.flowkit.models.mechscriptbot`
+            - Model for the MechanicalScriptingBot endpoint.
+
+
+          * - :py:obj:`~src.aali.flowkit.models.splitter`
+            - Model for the splitter endpoint.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> functions</api/src/aali/flowkit/models/functions/index>
+    <span class="nf nf-fa-file"></span> mechscriptbot</api/src/aali/flowkit/models/mechscriptbot/index>
+    <span class="nf nf-fa-file"></span> splitter</api/src/aali/flowkit/models/splitter/index>
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+
+Models package used to define the data models.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+

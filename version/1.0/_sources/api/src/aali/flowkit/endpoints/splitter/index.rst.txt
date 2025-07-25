@@ -1,0 +1,365 @@
+
+
+
+
+
+
+The ``splitter.py`` module
+==========================
+
+.. py:module:: src.aali.flowkit.endpoints.splitter
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: splitter
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~split_ppt`
+            - Endpoint for splitting text in a PowerPoint document into chunks.
+
+
+          * - :py:obj:`~split_py`
+            - Endpoint for splitting Python code into chunks.
+
+
+          * - :py:obj:`~split_pdf`
+            - Endpoint for splitting text in a PDF document into chunks.
+
+
+          * - :py:obj:`~process_ppt`
+            - Process a PowerPoint document to split text into chunks.
+
+
+          * - :py:obj:`~process_python_code`
+            - Process Python code to split text into chunks.
+
+
+          * - :py:obj:`~process_pdf`
+            - Process a PDF document to split text into chunks.
+
+
+          * - :py:obj:`~validate_request`
+            - Validate the splitter request and API key.
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~router`
+            - 
+
+
+
+    .. tab-item:: Constants
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~TOKEN_TO_CHARACTER_MULTIPLIER`
+            - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for splitting text into chunks.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: split_ppt(request: aali.flowkit.models.splitter.SplitterRequest, api_key: str = Header(...)) -> aali.flowkit.models.splitter.SplitterResponse
+   :async:
+
+
+   
+   Endpoint for splitting text in a PowerPoint document into chunks.
+
+
+   :Parameters:
+
+       **request** : :obj:`SplitterRequest`
+           An object containing 'document_content' in Base64,
+           'chunk_size', and 'chunk_overlap'
+
+       **api_key** : :class:`python:str`
+           The API key for authentication.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: split_py(request: aali.flowkit.models.splitter.SplitterRequest, api_key: str = Header(...)) -> aali.flowkit.models.splitter.SplitterResponse
+   :async:
+
+
+   
+   Endpoint for splitting Python code into chunks.
+
+
+   :Parameters:
+
+       **request** : :obj:`SplitterRequest`
+           An object containing 'document_content' in Base64,
+           'chunk_size', and 'chunk_overlap'
+
+       **api_key** : :class:`python:str`
+           The API key for authentication.
+
+
+
+   :Returns:
+
+       :obj:`SplitterResponse`
+           An object containing a list of text chunks.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: split_pdf(request: aali.flowkit.models.splitter.SplitterRequest, api_key: str = Header(...)) -> aali.flowkit.models.splitter.SplitterResponse
+   :async:
+
+
+   
+   Endpoint for splitting text in a PDF document into chunks.
+
+
+   :Parameters:
+
+       **request** : :obj:`SplitterRequest`
+           An object containing 'document_content' in Base64,
+           'chunk_size', and 'chunk_overlap'.
+
+       **api_key** : :class:`python:str`
+           The API key for authentication.
+
+
+
+   :Returns:
+
+       :obj:`SplitterResponse`
+           An object containing a list of text chunks.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: process_ppt(request: aali.flowkit.models.splitter.SplitterRequest) -> aali.flowkit.models.splitter.SplitterResponse
+
+   
+   Process a PowerPoint document to split text into chunks.
+
+
+   :Parameters:
+
+       **request** : :obj:`SplitterRequest`
+           An object containing 'document_content' in Base64,
+           'chunk_size', and 'chunk_overlap'
+
+
+
+   :Returns:
+
+       :obj:`SplitterResponse`
+           An object containing a list of text chunks.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: process_python_code(request: aali.flowkit.models.splitter.SplitterRequest) -> aali.flowkit.models.splitter.SplitterResponse
+
+   
+   Process Python code to split text into chunks.
+
+
+   :Parameters:
+
+       **request** : :obj:`SplitterRequest`
+           An object containing 'document_content' in Base64,
+           'chunk_size', and 'chunk_overlap'
+
+
+
+   :Returns:
+
+       :obj:`SplitterResponse`
+           An object containing a list of text chunks.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: process_pdf(request: aali.flowkit.models.splitter.SplitterRequest) -> aali.flowkit.models.splitter.SplitterResponse
+
+   
+   Process a PDF document to split text into chunks.
+
+
+   :Parameters:
+
+       **request** : :obj:`SplitterRequest`
+           An object containing 'document_content' in Base64,
+           'chunk_size', and 'chunk_overlap'
+
+
+
+   :Returns:
+
+       :obj:`SplitterResponse`
+           An object containing a list of text chunks.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: validate_request(request: aali.flowkit.models.splitter.SplitterRequest, api_key: str)
+
+   
+   Validate the splitter request and API key.
+
+
+   :Parameters:
+
+       **request** : :obj:`SplitterRequest`
+           An object containing 'document_content' in Base64,
+           'chunk_size', and 'chunk_overlap'
+
+       **api_key** : :class:`python:str`
+           The API key for authentication.
+
+
+
+
+
+
+
+   :Raises:
+
+       :obj:`HTTPException`
+           If the API key is invalid or if any of the request parameters are invalid.
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: TOKEN_TO_CHARACTER_MULTIPLIER
+   :value: 4
+
+
+.. py:data:: router
+
+
+

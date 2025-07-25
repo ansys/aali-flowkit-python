@@ -1,0 +1,103 @@
+
+
+:class:`MechScriptBotRequest`
+=============================
+
+.. py:class:: src.aali.flowkit.models.mechscriptbot.MechScriptBotRequest(/, **data: Any)
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+
+   
+   Request model for the MechanicalScriptingBot endpoint.
+
+
+   :Parameters:
+
+       **BaseModel** : :obj:`pydantic.BaseModel`
+           The base model for the request.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: MechScriptBotRequest
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~question`
+            - 
+          * - :py:attr:`~mech_script_bot_url`
+            - 
+          * - :py:attr:`~full_human_memory`
+            - 
+          * - :py:attr:`~full_ai_memory`
+            - 
+          * - :py:attr:`~full_variables`
+            - 
+          * - :py:attr:`~full_mechanical_objects`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from src.aali.flowkit.models.mechscriptbot import MechScriptBotRequest
+
+
+
+Attribute detail
+----------------
+.. py:attribute:: question
+   :type:  str
+
+.. py:attribute:: mech_script_bot_url
+   :type:  str
+
+.. py:attribute:: full_human_memory
+   :type:  list[str]
+
+.. py:attribute:: full_ai_memory
+   :type:  list[str]
+
+.. py:attribute:: full_variables
+   :type:  list[str]
+
+.. py:attribute:: full_mechanical_objects
+   :type:  list[str]
+
+
+
+

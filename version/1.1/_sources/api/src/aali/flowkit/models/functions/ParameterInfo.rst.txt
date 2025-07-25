@@ -1,0 +1,83 @@
+
+
+:class:`ParameterInfo`
+======================
+
+.. py:class:: src.aali.flowkit.models.functions.ParameterInfo(/, **data: Any)
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+
+   
+   Parameter information model.
+
+
+   :Parameters:
+
+       **BaseModel** : :obj:`pydantic.BaseModel`
+           The base model for the parameter information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ParameterInfo
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~name`
+            - 
+          * - :py:attr:`~type`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from src.aali.flowkit.models.functions import ParameterInfo
+
+
+
+Attribute detail
+----------------
+.. py:attribute:: name
+   :type:  str
+
+.. py:attribute:: type
+   :type:  str
+
+
+
+

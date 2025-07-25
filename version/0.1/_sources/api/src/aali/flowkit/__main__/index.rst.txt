@@ -1,0 +1,152 @@
+
+
+
+
+
+
+The ``__main__.py`` module
+==========================
+
+.. py:module:: src.aali.flowkit.__main__
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: __main__
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~parse_cli_args`
+            - Parse the command line arguments.
+
+
+          * - :py:obj:`~substitute_empty_values`
+            - Substitute the empty values with configuration values.
+
+
+          * - :py:obj:`~main`
+            - Run entrypoint for the FlowKit service.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Main module for the FlowKit service.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: parse_cli_args()
+
+   
+   Parse the command line arguments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: substitute_empty_values(args)
+
+   
+   Substitute the empty values with configuration values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: main()
+
+   
+   Run entrypoint for the FlowKit service.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+

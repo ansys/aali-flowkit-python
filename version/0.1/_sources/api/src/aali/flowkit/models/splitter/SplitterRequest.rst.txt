@@ -1,0 +1,88 @@
+
+
+:class:`SplitterRequest`
+========================
+
+.. py:class:: src.aali.flowkit.models.splitter.SplitterRequest(/, **data: Any)
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+
+   
+   Request model for the splitter endpoint.
+
+
+   :Parameters:
+
+       **BaseModel** : :obj:`pydantic.BaseModel`
+           The base model for the request.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: SplitterRequest
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~document_content`
+            - 
+          * - :py:attr:`~chunk_size`
+            - 
+          * - :py:attr:`~chunk_overlap`
+            - 
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from src.aali.flowkit.models.splitter import SplitterRequest
+
+
+
+Attribute detail
+----------------
+.. py:attribute:: document_content
+   :type:  bytes
+
+.. py:attribute:: chunk_size
+   :type:  int
+
+.. py:attribute:: chunk_overlap
+   :type:  int
+
+
+
+

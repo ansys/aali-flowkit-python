@@ -1,0 +1,87 @@
+
+
+
+
+
+
+The ``mechscriptbot.py`` module
+===============================
+
+.. py:module:: src.aali.flowkit.models.mechscriptbot
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: mechscriptbot
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~src.aali.flowkit.models.mechscriptbot.MechScriptBotRequest`
+            - Request model for the MechanicalScriptingBot endpoint.
+
+
+          * - :py:obj:`~src.aali.flowkit.models.mechscriptbot.MechScriptBotResponse`
+            - Response model for the MechanicalScriptingBot endpoint.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> MechScriptBotRequest</api/src/aali/flowkit/models/mechscriptbot/MechScriptBotRequest>
+    <span class="nf nf-cod-symbol_class"></span> MechScriptBotResponse</api/src/aali/flowkit/models/mechscriptbot/MechScriptBotResponse>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Model for the MechanicalScriptingBot endpoint.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+
